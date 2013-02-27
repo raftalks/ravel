@@ -4,6 +4,8 @@
 
 ## CMS Package for Laravel 4
 
+![Screenshot](http://screencloud.net//img/screenshots/875bcabf90c92c50f2caac31d1fdd46e.png)
+
 ### How to Install
 
 - Install L4 App from Github ( Watch this if you need to know how : http://net.tutsplus.com/tutorials/php/how-to-setup-laravel-4/)
