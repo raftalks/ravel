@@ -43,7 +43,7 @@
 ```
 - Configure your database settings in the L4 app/config/database.php file
 - Open your terminal in the L4 App root directory and run composer update command
-- Again run the following command on your terminal
+- And run the following command in the terminal to start installing the CMS package
 
 ```
  php artisan ravel:install
