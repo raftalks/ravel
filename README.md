@@ -6,7 +6,8 @@
 
 - Install L4 App from Github ( Watch this if you need to know how : http://net.tutsplus.com/tutorials/php/how-to-setup-laravel-4/)
 - Modify Laravel 4 App Composer.json file as below
-```json
+
+```php
 {
 	"require": {
 		"laravel/framework": "4.0.*",
