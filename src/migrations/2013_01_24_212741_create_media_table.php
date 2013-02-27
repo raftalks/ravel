@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+
+class CreateMediaTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('medias', function($table)
+		{
+			$table->increments('id');
+			$table->string('media_type'); // IMAGE FILE | VIDEO FILE | YOUTUBE
+			$table->string('path');
+			$table->string('caption');
+			$table->boolean('publish')->default(false);
+			$table->boolean('approved')->default(false);
+			$table->text('filedata')->nullable();
+			$table->string('keywords');
+			$table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('medias');
+	}
+
+}

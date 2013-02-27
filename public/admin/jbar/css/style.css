@@ -1,0 +1,58 @@
+.jbar{
+	width:100%;
+	position:fixed;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=95); 
+	opacity: 0.95;
+	-moz-opacity: 0.95;
+	text-align:center;
+	left:0px;
+	z-index:9999999;
+	margin:0px;
+	padding:.5em;
+}
+.jbar-top{
+	top:0px;
+}
+.jbar-bottom{
+	bottom:0px;
+	color:#777;
+}
+.jbar-content{
+	line-height:46px;
+	font-size: 18px;
+	font-family:'Lucida Grande',sans-serif;
+}
+a.jbar-cross{
+	position:absolute;
+	width:31px;
+	height:31px;
+	background:transparent url(../images/cross.png) no-repeat top left;	
+	cursor:pointer;
+	right:10px;
+}
+a.jbar-cross:hover{
+	background-image: url(../images/cross_hover.png)
+}
+.jbar-top a.jbar-cross{
+	top:8px;	
+}
+.jbar-bottom a.jbar-cross{
+	bottom:8px;
+}
+
+
+.notification
+{
+	background-color: #4F6E18;
+}
+
+.notification.warning
+{
+	background-color: #DF8C19;
+}
+
+.notification.error
+{
+	background-color: red;
+	color:#fff;
+}

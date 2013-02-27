@@ -1,0 +1,37 @@
+
+/************ Internet Explorer fixes ************/
+
+#sidebar #main-nav ul li a {
+                _padding: 10px 15px; /* IE6 Hack */
+                _display: block; /* IE6 Hack */
+                _margin-bottom: -11px !important; /* IE6 Hack */
+                }
+
+.content-box-header {
+                margin-top: 0;
+                }
+                
+ul.content-box-tabs { /* IE6 Hack */
+                _position: relative; 
+                _top: 2px;
+                }
+			
+				
+.action-button:hover {
+                cursor: pointer;
+                }
+
+.input-notification {
+				position: relative;
+				top: -5px;
+				_background-position: left 6px; /* IE6 Hack */
+				}
+
+#login-wrapper #login-content input {
+				margin: 0;
+				}
+
+* html #facebox_overlay { /* IE6 Hack */
+			_position: absolute;
+			_height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+			}
