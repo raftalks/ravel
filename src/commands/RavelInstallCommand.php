@@ -43,14 +43,18 @@ class RavelInstallCommand extends Command {
 
 		if($this->checkifWorkBench())
 		{
+			$this->call('asset:publish',array('--bench'=>'raftalks/ravel'));
 			$this->call('migrate',array('--bench'=>'raftalks/ravel'));
 		}
 		else
 		{	
+			$this->call('asset:publish',array('--package'=>'raftalks/ravel'));
 			$this->call('migrate',array('--package'=>'raftalks/ravel'));
 		}
 
 		$this->call('db:seed',array('--class'=>'RavelDatabaseSeeder'));
+
+
 
 		//$this->call('migrate',array('--path'=>$path));
 
