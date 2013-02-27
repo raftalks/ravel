@@ -19,6 +19,7 @@ Route::group(array('prefix'=>_ADMIN_BASE_),function()
 {
 	//Route::controller("/", 'DashboardAdminController');
 	Route::get('/','DashboardAdminController@getIndex');
+	Route::get('/logout',array('uses'=>'AdminUserLoginController@getLogout','as'=>'ravellogout'));
 	Route::controller("/posts", 'PostsAdminController');
 	Route::controller("/pages", 'PagesAdminController');
 	Route::controller("/login", 'AdminUserLoginController');
