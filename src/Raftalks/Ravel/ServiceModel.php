@@ -68,7 +68,7 @@ abstract class ServiceModel
 
 	protected function addErrorMessage($message, $status=200, $key = 'errors')
 	{	
-		$this->error_messages[] = $message;
+		$this->error_messages = $message;
 		$this->response_status = $status;
 	}
 
@@ -76,7 +76,11 @@ abstract class ServiceModel
 	public function getErrors()
 	{
 		$errors = $this->error_messages;
-		return implode(', ', $errors);
+		if(is_array($errors) && !empty($errors))
+		{
+			return implode(', ', array_values($errors));
+		}
+		return $errors;
 	}
 
 	public function getResponseStatus()
@@ -262,6 +266,12 @@ abstract class ServiceModel
 
 	public function insert($data, $callback=null)
 	{
+		if($data == false || empty($data))
+		{
+			$this->addErrorMessage('Empty Item Submitted',404);
+			return false;
+		}
+
 		if($this->verify('create'))
 		{
 				$model = $this->model()->newInstance();

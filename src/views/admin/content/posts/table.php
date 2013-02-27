@@ -67,20 +67,18 @@
                             $tr->td(function($td)
                             {
 
-                              $td->div(function($div)
-                              {
+                              // $td->div(function($div)
+                              // {
 
-                                $content = '<a href="#" title="First Page">&laquo; First</a><a href="#" title="Previous Page">&laquo; Previous</a>
-                      <a href="#" class="number" title="1">1</a>
-                      <a href="#" class="number" title="2">2</a>
-                      <a href="#" class="number current" title="3">3</a>
-                      <a href="#" class="number" title="4">4</a>
-                      <a href="#" title="Next Page">Next &raquo;</a><a href="#" title="Last Page">Last &raquo;</a>';
+                              //   // $content = "<div class='paginator' paginate-pages='{{pages}}'></div>";
 
-                                $div->putText($content);
+                              //   // $div->putText($content);
 
-                                $div->setClass('pagination');
-                              });
+                              //   $div->setClass('pagination');
+                              //   $div->setRootAttr('paginate-pages',aw('pages'));
+                              // });
+
+                              $td->div()->class('paginator pagination')->paginatepages('{{pages}}','paginate-pages');
 
                               $td->setColspan('6');
                             });
@@ -98,5 +96,3 @@
         );
     });
 ?>
-Current Page: {{ currentPage }}
-<div class='paginator' paginate-pages='{{pages}}'></div>

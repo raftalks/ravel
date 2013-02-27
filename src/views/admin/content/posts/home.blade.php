@@ -17,6 +17,10 @@
  @include('ravel::admin.content.posts.edit')
 </script>
 
+<script type="text/ng-template" id='posts/view'>
+ @include('ravel::admin.content.posts.view')
+</script>
+
 @stop
 
 @section('javascripts')
@@ -35,6 +39,14 @@
 			});
 	});
 
+// <a href="#" title="First Page">&laquo; First</a>
+// <a href="#" title="Previous Page">&laquo; Previous</a>
+// <a href="#" class="number" title="1">1</a>
+// <a href="#" class="number" title="2">2</a>
+// <a href="#" class="number current" title="3">3</a>
+// <a href="#" class="number" title="4">4</a>
+// <a href="#" title="Next Page">Next &raquo;</a>
+// <a href="#" title="Last Page">Last &raquo;</a>
 
   App.directive('paginator',function($timeout)
   {
@@ -42,12 +54,12 @@
 
             restrict:'C',
             replace:true,
-            template: '<div class="pagination-holder dark-theme">' + '</div>',
+            template: '<div class="pagination-holder">' + '</div>',
             controller: function($scope, $element, $attrs)
             {
 
                 var halfDisplayed = 1.5,
-                displayedPages = 2,
+                displayedPages = 3,
                 edges = 2;
 
                 $scope.getInterval = function()
@@ -83,10 +95,10 @@
 
                     if (pageIndex == $scope.currentPage)
                     {
-                        link = $('<span class="current">' + (options.text) + '</span>');
+                        link = $('<a href="#" class="number current">' + (options.text) + '</a>');
                     } else 
                     {
-                        link = $('<a href="javascript:void(0)" class="page-link">' + (options.text) + '</a>');
+                        link = $('<a href="javascript:void(0)" class="number page-link">' + (options.text) + '</a>');
                         link.bind('click', function() {
                             $scope.selectPage(pageIndex);
                             $scope.switchPage(pageIndex +1);
@@ -227,9 +239,10 @@
 		}
 
 		//read
-		$scope.read = function()
+		$scope.read = function(item)
 		{
-
+        $scope.item = item;
+        $scope.gotopage('posts/view');
 		}
 
     $scope.edit = function(item)

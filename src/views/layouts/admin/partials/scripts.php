@@ -16,7 +16,7 @@
               scope.nowloading = false;
               var status = response.status;
               var data = response.data;
-              var messages = data.message;
+              var messages = data.error;
 
               //error handler
                console.log(data);
@@ -110,8 +110,8 @@ function show_error_message(message)
 
   //   });
   // }
-  var error_msg = message.errors[0];
-  showError(error_msg);
+
+  showError(message);
 
 }
 

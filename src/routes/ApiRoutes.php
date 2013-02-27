@@ -1,15 +1,18 @@
 <?php
+
 Route::filter('ravelauth.api', function()
 {
 	if(!is_null(Request::getUser()))
 	{
 		
 		$user = Request::getUser();
+
 		$password = Request::getPassword();
 
 		$credentials = array('username'=>$user, 'password'=> $password);
 
 		$loginAttempt = Auth::attempt($credentials);
+
 
 		if($loginAttempt !== true)
 		{
