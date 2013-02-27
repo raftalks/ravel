@@ -29,7 +29,9 @@
 ```
 
 - Add Ravel Service Provider to the app/config/app.php file under the array key "providers" as shown below
+
 ```php
+
 'providers' => array(
 		
 		'Raftalks\Ravel\RavelServiceProvider',
@@ -40,9 +42,11 @@
 
 - Open your terminal in the L4 App root directory and run composer update command
 - Again run the following command on your terminal
+
 ```
  php artisan ravel:install
 ```
+
 - The above command will publish all the assets and run the migration and seeds
 - Before installing Ravel CMS, you may want to do some configuration changes like setup a username and password, look inside Vendor/Raftalks/Ravel/src/config/app.php file, by default the username is admin and password is ravel.
 
