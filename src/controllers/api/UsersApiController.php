@@ -3,7 +3,7 @@
 class UsersApiController extends ResourceApiBase
 {
 
-	protected $moduleName = 'Settings';
+	protected $moduleName = 'settings';
 
 
 	protected function setupResources()

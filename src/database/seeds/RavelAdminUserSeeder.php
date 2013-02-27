@@ -18,6 +18,8 @@ class RavelAdminUserSeeder extends Seeder
 		
 		$user = new Usermodel;
 		$user->fill($adminUser);
+		$user->activated = true;
+		$user->api_token = makeApiKey();
 		$user->save();
 		
 	}

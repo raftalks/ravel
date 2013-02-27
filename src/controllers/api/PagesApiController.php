@@ -2,7 +2,7 @@
 
 class PagesApiController extends ContentApi
 {
-	protected $moduleName = 'Contents';
+	protected $moduleName = 'contents';
 
 	public $contentType = 'page';
 
