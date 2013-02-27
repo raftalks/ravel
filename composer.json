@@ -1,6 +1,6 @@
 {
     "name": "raftalks/ravel",
-    "description": "",
+    "description": "CMS Package for Laravel 4 powered with Angularjs",
     "authors": [
         {
             "name": "Raf",
