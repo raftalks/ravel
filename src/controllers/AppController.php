@@ -1,6 +1,6 @@
 <?php
 
-class AppController extends BaseController
+class AppController extends RavelBaseController
 {
 
 	protected $title = '';

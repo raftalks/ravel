@@ -1,6 +1,6 @@
 <?php
 
-abstract class ResourceApiBase extends BaseController
+abstract class ResourceApiBase extends RavelBaseController
 {
 	protected $moduleName = 'Global';
 

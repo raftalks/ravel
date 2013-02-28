@@ -15,7 +15,7 @@
 	 *      domain.com/items/?order_by=[field1,field2]&sort=asc 	=> order the items by given fields with comma delimiter and sort either by asc or desc
 	 * */
 
-class ApiController extends BaseController
+class ApiController extends RavelBaseController
 {
 
 	

@@ -30,7 +30,7 @@
               //         deferred:deferred
               //     }
               //     //window.location = "./index.html";
-              // }
+              // }  
 
               // otherwise
               return $q.reject(response);
