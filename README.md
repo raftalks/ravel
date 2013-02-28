@@ -44,7 +44,7 @@
 
 ```
 - Configure your database settings in the L4 app/config/database.php file
-- Open your terminal in the L4 App root directory and run composer update command
+- Open your terminal in the L4 App root directory and run `php composer.phar update` command
 - And run the following command in the terminal to start installing the CMS package
 
 ```
@@ -52,7 +52,7 @@
 ```
 
 - The above command will publish all the assets and run the migration and seeds
-- Before installing Ravel CMS, you may want to do some configuration changes like setup a username and password, look inside Vendor/Raftalks/Ravel/src/config/app.php file, by default the username is admin and password is ravel.
+- Before using Ravel CMS, you may want to do some configuration changes like setup a username and password, look inside vendor/raftalks/ravel/src/config/app.php file, by default the username is "admin" and password is "ravel".
 
 - By default the CMS admin panel is available on http://www.domain.com/admin and you can change the base url to admin panel by changing the app config file of the package.
 
