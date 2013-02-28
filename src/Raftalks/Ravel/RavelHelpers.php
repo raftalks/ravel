@@ -38,7 +38,7 @@ function dd($value)
 
 function admin_asset($path)
 {
-	return '/packages/raftalks/ravel/'.$path;
+	return URL::asset('packages/raftalks/ravel/'.$path);
 }
 
 function aw($str)
