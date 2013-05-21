@@ -51,7 +51,8 @@ abstract class ResourceApiBase extends RavelBaseController
 	 */
 	public function store()
 	{
-		$data = Input::json();
+		$data = Input::get();
+
 		$respond = $this->resource->insert($data);
 
 		//if respond returns boolean false
@@ -73,7 +74,7 @@ abstract class ResourceApiBase extends RavelBaseController
 	 */
 	public function update($id)
 	{
-		$data = Input::json();
+		$data = Input::get();
 		$respond = $this->resource->save($data, $id);
 
 		//if respond returns boolean false
