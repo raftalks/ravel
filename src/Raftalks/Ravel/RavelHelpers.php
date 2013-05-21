@@ -1,87 +1,126 @@
 <?php
 
-function adminUrl($str)
+if(! function_exists('adminUrl'))
 {
-	$prefix = _ADMIN_BASE_;
-	return $prefix . $str;
-}
-
-
-function currentUserName()
-{
-	$user = Auth::getUser();
-	if(!is_null($user))
+	function adminUrl($str)
 	{
-		return $user->username;
+		$prefix = _ADMIN_BASE_;
+		return $prefix . $str;
 	}
 
-	return null;
 }
 
-function apiUrl($str)
+if(! function_exists('currentUserName'))
 {
-	$prefix = _API_BASE_;
-	return $prefix . $str;
-}
-
-function frontUrl($str)
-{
-	$prefix = _FRONT_BASE_;
-	return $prefix . $str;
-}
-
-function dd($value)
-{
-	die(call_user_func_array('var_dump', func_get_args()));
-}
-
-
-function admin_asset($path)
-{
-	return URL::asset('packages/raftalks/ravel/'.$path);
-}
-
-function aw($str)
-{
-	return "{{ $str }}";
-}
-
-function showflag($ccode)
-{
-	return "<img  class='flag flag-$ccode'/>";
-}
-
-function langflag($lang)
-{
-	$ccode = Config::get("ravel::flags.$lang",'en');
-	if(!is_null($ccode))
+	function currentUserName()
 	{
-		return showflag($ccode);
+		$user = Auth::getUser();
+		if(!is_null($user))
+		{
+			return $user->username;
+		}
+
+		return null;
 	}
 }
 
-function current_lang()
+if(! function_exists('apiUrl'))
 {
-	return Config::get('app.locale');
+	function apiUrl($str)
+	{
+		$prefix = _API_BASE_;
+		return $prefix . $str;
+	}
+}
+
+if(! function_exists('frontUrl'))
+{
+	function frontUrl($str)
+	{
+		$prefix = _FRONT_BASE_;
+		return $prefix . $str;
+	}
+}
+
+if(! function_exists('dd'))
+{
+	function dd($value)
+	{
+		die(call_user_func_array('var_dump', func_get_args()));
+	}
 }
 
 
-function showActivated()
+if(! function_exists('admin_asset'))
 {
-	return '<p>Activated</p>';
+	function admin_asset($path)
+	{
+		return URL::asset('packages/raftalks/ravel/'.$path);
+	}
 }
 
-function showDeactivated()
+if(! function_exists('aw'))
 {
-	return '<p>Deactivated</p>';
+	function aw($str)
+	{
+		return "{{ $str }}";
+	}
+}
+
+if(! function_exists('showflag'))
+{
+	function showflag($ccode)
+	{
+		return "<img  class='flag flag-$ccode'/>";
+	}
+}
+
+if(! function_exists('langflag'))
+{
+	function langflag($lang)
+	{
+		$ccode = Config::get("ravel::flags.$lang",'en');
+		if(!is_null($ccode))
+		{
+			return showflag($ccode);
+		}
+	}
+}
+
+if(! function_exists('current_lang'))
+{
+	function current_lang()
+	{
+		return Config::get('app.locale');
+	}
+}
+
+if(! function_exists('showActivated'))
+{
+	function showActivated()
+	{
+		return '<p>Activated</p>';
+	}
 }
 
 
-function makeApiKey()
+if(! function_exists('showDeactivated'))
 {
-	$uniqid = uniqid();
-	$rand = rand(1000,9999);
-	$key = md5($rand . $uniqid);
-	
-	return $key;
+	function showDeactivated()
+	{
+		return '<p>Deactivated</p>';
+	}
+}
+
+
+if(! function_exists('makeApiKey'))
+{
+	function makeApiKey()
+	{
+		$uniqid = uniqid();
+		$rand = rand(1000,9999);
+		$key = md5($rand . $uniqid);
+		
+		return $key;
+	}
 }
