@@ -37,8 +37,9 @@ class RavelInstallCommand extends Command {
 	 */
 	public function fire()
 	{
-		$app = $this->getLaravel();
-		$env = $app->environment();
+
+		// $app = $this->getLaravel();
+		// $env = $app->environment();
 	
 
 		if($this->checkifWorkBench())
@@ -55,10 +56,7 @@ class RavelInstallCommand extends Command {
 		$this->call('db:seed',array('--class'=>'RavelDatabaseSeeder'));
 
 
-
-		//$this->call('migrate',array('--path'=>$path));
-
-		//$this->info('Successfully Syncronised Roles for Modules');
+		$this->info('Successfully Completed Installation of Ravel');
 	}
 
 
@@ -67,9 +65,5 @@ class RavelInstallCommand extends Command {
 		$path = __FILE__;
 		return str_contains(strtolower($path),'/workbench/raftalks/ravel/');
 	}
-
-	
-
-	
 
 }
