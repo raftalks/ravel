@@ -11,7 +11,7 @@ App::error(function(Exception $e, $code)
 
 	if (Request::ajax())
 	{
-		$default_message = 'Oops! Something really went wrong...';
+		$default_message = 'Oops! Something went wrong...';
 		$headers = array();
 
 		return Response::json(array(

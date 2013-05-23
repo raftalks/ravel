@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 class Usergroup extends EloquentBaseModel
 {

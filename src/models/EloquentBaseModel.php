@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 
 class EloquentBaseModel extends Eloquent
 {

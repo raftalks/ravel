@@ -29,6 +29,9 @@ class RavelServiceProvider extends ServiceProvider {
 		$auth = $this->app['auth'];
 		$rolesConfig = $this->getAppConfig('roles');
 		$this->app['acl'] = new Acl\Acl($auth, $rolesConfig);
+		$this->app['acl']->setModuleModel(); 
+		$this->app['acl']->setUsergroupModel(); 
+		$this->app['acl']->setRoleModel(); 
 
 		$this->loadFilesRequired();
 

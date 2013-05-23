@@ -1,5 +1,8 @@
 <?php namespace Raftalks\Ravel\Acl;
 use Config;
+use Module;
+use Usergroup;
+use Role;
 
 class Acl implements AccessControlInterface
 {
@@ -23,17 +26,26 @@ class Acl implements AccessControlInterface
 	public function __construct($auth, $rolesConfig)
 	{
 		$this->auth = $auth;
-
 		$this->modules = $rolesConfig['modules'];
 		$this->moderator_groups = $rolesConfig['moderator_usergroups'];
-
 		$this->userGroups = $rolesConfig['usergroups'];
-
-		$this->model_module = new \Module;
-		$this->model_usergroup = new \Usergroup;
-		$this->model_role = new \Role;
-
 	}
+
+	public function setModuleModel($module = null)
+	{
+		$this->model_module = (!is_null($module)) ? $module: new Module;
+	}
+
+	public function setUsergroupModel($usergroup = null)
+	{
+		$this->model_usergroup = (!is_null($usergroup)) ? $usergroup : new Usergroup;
+	}
+
+	public function setRoleModel($role = null)
+	{
+		$this->model_role = (!is_null($role)) ? $role : new Role;
+	}
+
 
 
 	public function getModeratorGroups()
@@ -132,7 +144,6 @@ class Acl implements AccessControlInterface
 
 	public function setModule($module)
 	{
-
 		$this->module = strtolower($module);
 	}
 
