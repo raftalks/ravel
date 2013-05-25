@@ -20,6 +20,7 @@ App::bind('Usermodel', function()
 });
 
 
+
 App::bind('EmptyCollection',function()
 {
 	return new Illuminate\Support\Collection(array());

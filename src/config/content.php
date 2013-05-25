@@ -4,6 +4,9 @@ return array(
 
 	'types' => array('post','page','attachement'),
 
+	'status'	=> array('draft','submitted','published'),
+
+
 	'custom_fields' => array(
 
 			//'example'

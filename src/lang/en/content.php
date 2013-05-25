@@ -26,5 +26,11 @@ return array(
 	'update_page'			=> 'Update Page',
 	'create_page'			=> 'Create Page',
 
+	'post_categories'		=> 'Post Categories',
+	'category_name'			=> 'Category Name',
+	'list_layout'			=> 'List Layout',
+	'item_layout'			=> 'Item Layout',
+	'new_category'			=> 'New Category',
+
 
 );

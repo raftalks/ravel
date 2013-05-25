@@ -1,5 +1,5 @@
 <?php namespace Raftalks\Ravel\Menu;
-
+use View, Request;
 
 class Menu implements MenuInterface
 {
@@ -25,7 +25,7 @@ class Menu implements MenuInterface
 	{
 		if(is_null($this->requestPath))
 		{
-			$this->requestPath = \Request::url();
+			$this->requestPath = Request::url();
 		}
 
 		return $this->requestPath;
@@ -116,7 +116,7 @@ class Menu implements MenuInterface
 		$links = $this->getProcessedLinks($this->getLinks());
 		$template = $this->getTemplate();
 
-		return $this->build = \View::make($template,array('menu_links'=>$links));
+		return $this->build = View::make($template,array('menu_links'=>$links));
 
 	}
 

@@ -31,4 +31,5 @@ Route::group(array('prefix'=>_API_BASE_,'before'=>'ravelauth.api|ravelauth'),fun
 
 	Route::resource('users','UsersApiController', array('only'=>array('index','show','store','update','destroy')));
 	
+	Route::resource('postcategories','PostsCategoriesApiController',array('only'=>array('index','show','store','update','destroy')));
 });

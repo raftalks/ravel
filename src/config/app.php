@@ -2,33 +2,65 @@
 
 return array(
 
-	'frontend_theme'	=> 'default', //default theme to load the frontend
+	/**
+	 * frontend theme
+	 */
+	'frontend_theme'	=> 'default',
 
-	'admin_base_uri'	=> 'admin',//base url for admin
+	/**
+	 * base url for administration
+	 */
+	'admin_base_uri'	=> 'admin',
 
-	'api_base_uri'		=> 'ravel/api', //base url for api
+	/**
+	 * api base uri
+	 */	
+	'api_base_uri'		=> 'ravel/api', 
 
-	'frontend_base_uri'	=> '', //base url for frontend
+	/**
+	 * front end uri
+	 */
+	'frontend_base_uri'	=> '', 
 
+	/**
+	 * Default User added to when installing
+	 */
 	'setup_user'		=> array('username'=>'admin', 'password'=>'ravel', 'email' => 'admin@yourwebsite.com'),
 
 
-						//path from src directory of the package
+	/**
+	 * path from src directory of the package
+	 */
 	'required_files'	=> array(
 							'Raftalks/Ravel/FormTemplates.php',
 						),
 
+	/**
+	 * Layouts used in the system frontend theme
+	 */
+	'layouts'			=> array(
+							'list' => array(
+										'blog',
+										'list',
+									),
+							'item' => array(
+									'page',
+									'post',
+								)
+						),
+	/**
+	 * Namespace Class Aliases
+	 */
 	'aliases' 			=> array(
 
 							'Acl'			=> 'Raftalks\Ravel\Facades\Acl',
 							'Post'			=> 'Raftalks\Ravel\Facades\Post',
 							'Page'			=> 'Raftalks\Ravel\Facades\Page',
+							'PostCategory'	=> 'Raftalks\Ravel\Facades\PostCategory',
 							'Menu'			=> 'Raftalks\Ravel\Facades\Menu',
 							'UsersLibrary'	=> 'Raftalks\Ravel\Facades\UsersLibrary',
 							'Html'			=> 'Html\Html',
 							'Form'			=> 'Form\Form',
-
-
 						),    
 
 );

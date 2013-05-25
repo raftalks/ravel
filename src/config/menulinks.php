@@ -22,6 +22,11 @@ return array(
 												'label' => 'Posts',
 												'link'	=> action('PostsAdminController@getIndex'),
 												),
+
+										'posts_categories' => array(
+												'label' => 'Post Categories',
+												'link'	=> action('PostsCategoriesAdminController@getIndex'),
+												),
 										)
 						),
 
