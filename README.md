@@ -39,6 +39,17 @@
 - The above command will publish all the assets and run the migration and seeds
 - Before using Ravel CMS, you may want to do some configuration changes like setup a username and password, look inside vendor/raftalks/ravel/src/config/app.php file, by default the username is "admin" and password is "ravel".
 
+### How to update the package
+- Use the following composer update command to download the updates 
+```
+php composer.phar update
+```
+- and after downloading the updates, run the following artisan command to make sure migrations and package assets gets updated
+```
+php artisan ravel:update
+```
+
+### Admin Panel
 - By default the CMS admin panel is available on http://www.domain.com/admin and you can change the base url to admin panel by changing the app config file of the package.
 
 Documentation will be updated soon
