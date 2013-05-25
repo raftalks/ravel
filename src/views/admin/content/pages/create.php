@@ -3,7 +3,7 @@
 echo Form::make('div',function($form)
 {
 
-	$form->box_panel(trans('ravel::content.create_post'),function($form)
+	$form->box_panel(trans('ravel::content.create_page'),function($form)
 	{
 
 		$form->div(function($div)
@@ -14,7 +14,7 @@ echo Form::make('div',function($form)
 
 			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea');
 
-			$customfields = Config::get('ravel::content.custom_fields.post');
+			$customfields = Config::get('ravel::content.custom_fields.page');
 			$div->ng_custom_fields($customfields);
 
 			$div->setClass('column span8');
@@ -32,7 +32,7 @@ echo Form::make('div',function($form)
 					'Submitted'	=> 'Submitted'
 				);
 
-				//status of the post
+				//status of the page
 				$div->select('status',trans('ravel::content.status'))->options($options)->ng_model('item.status','ng-model');
 				
 
@@ -41,7 +41,7 @@ echo Form::make('div',function($form)
 
 
 
-				//allow comments submission to this post				
+				//allow comments submission to this page				
 				$div->fieldset(function($div)
 				{
 					$div->legend(trans('ravel::content.comment_settings'));

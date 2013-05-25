@@ -7,5 +7,6 @@ return array(
 	'modify'	=> 'Modify',
 	'cancel'	=> 'Cancel',
 	'reset'		=> 'Reset',	
+	'delete'	=> 'Delete',
 
 );

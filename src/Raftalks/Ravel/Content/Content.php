@@ -100,7 +100,7 @@ abstract class Content extends ServiceModel
 			$callback = function($model,$host)
 			{
 				
-				return $model->with(array(
+				$result = $model->with(array(
 						'contentmetas',
 						'author'	=> function($query)
 						{
@@ -119,11 +119,31 @@ abstract class Content extends ServiceModel
 						}
 					});
 
+				
+
+				return $result;
+
 			};
 						
 		}
 
-		return parent::fetch($page, $take, $callback);
+		$result = parent::fetch($page, $take, $callback);
+		if($result)
+		{
+			$result->each(function($item)
+			{
+				$customFields = $item->contentmetas;
+				foreach($customFields as $citem)
+				{
+					$fieldname = $citem['metakey'];
+					$value = $citem['metavalue'];
+					$item->$fieldname = $value;
+				}
+			});
+
+		}
+		
+		return $result;
 
 	}
 
@@ -272,7 +292,13 @@ abstract class Content extends ServiceModel
 			$cid = $model->id;
 			foreach($meta_data as $row)
 			{
-				$meta = $model->contentmetas()->where('content_id','=',$cid)->where('metakey','=',$row['metakey'])->first();
+				$row['content_type'] = $this->getContentType();
+				$meta = $model->contentmetas()
+							->where('content_id','=',$cid)
+							->where('content_type','=',$row['content_type'])
+							->where('metakey','=',$row['metakey'])
+							->first();
+
 				if(is_null($meta))
 				{
 					$meta = new \Contentmeta($row);

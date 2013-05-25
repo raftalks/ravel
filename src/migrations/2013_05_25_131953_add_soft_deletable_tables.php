@@ -11,30 +11,30 @@ class AddSoftDeletableTables extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('contents',function($table)
+		Schema::table('contents',function(Blueprint $table)
 		{
-			$table->timestamp('deleted_at');
+			$table->softDeletes();
 		});
 
-		Schema::table('comments',function($table)
+		Schema::table('comments',function(Blueprint $table)
 		{
-			$table->timestamp('deleted_at');
+			$table->softDeletes();
 		});
 
-		Schema::table('categories',function($table)
+		Schema::table('categories',function(Blueprint $table)
 		{
-			$table->timestamp('deleted_at');
+			$table->softDeletes();
 		});
 
 
-		Schema::table('medias',function($table)
+		Schema::table('medias',function(Blueprint $table)
 		{
-			$table->timestamp('deleted_at');
+			$table->softDeletes();
 		});
 
-		Schema::table('users',function($table)
+		Schema::table('users',function(Blueprint $table)
 		{
-			$table->timestamp('deleted_at');
+			$table->softDeletes();
 		});
 	}
 
@@ -45,30 +45,7 @@ class AddSoftDeletableTables extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('contents',function($table)
-		{
-			$table->dropColumn('deleted_at');
-		});
-
-		Schema::table('comments',function($table)
-		{
-			$table->dropColumn('deleted_at');
-		});
-
-		Schema::table('categories',function($table)
-		{
-			$table->dropColumn('deleted_at');
-		});
-
-		Schema::table('medias',function($table)
-		{
-			$table->dropColumn('deleted_at');
-		});
-
-		Schema::table('users',function($table)
-		{
-			$table->dropColumn('deleted_at');
-		});
+		
 	}
 
 }

@@ -222,9 +222,9 @@
 		//create
 		$scope.create = function()
 		{
-        $scope.insertItem = true;
-        $scope.item = new DataSource;
-        $scope.gotopage('categories/create');
+            $scope.insertItem = true;
+            $scope.item = new DataSource;
+            $scope.gotopage('categories/create');
 		}
 
 		//read
@@ -269,8 +269,13 @@
 		//delete
 		$scope.delete = function()
 		{
-
-
+            var selected = $scope.item;
+            $scope.item.$remove(function(data, response)
+            {
+                var index = $scope.recordset.indexOf(selected);
+                $scope.recordset.splice(index, 1);
+                $scope.gotopage('categories/table');
+            });
 		}
 
 
@@ -278,9 +283,9 @@
 
 		$scope.cancel = function()
 		{
-        $scope.insertItem = true;
-        $scope.item = {};
-        $scope.gotopage('categories/table');
+             $scope.insertItem = true;
+             $scope.item = {};
+             $scope.gotopage('categories/table');
 		}
 
 

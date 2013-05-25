@@ -14,6 +14,9 @@ echo Form::make('div',function($form)
 
 			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea');
 
+			$customfields = Config::get('ravel::content.custom_fields.post');
+			$div->ng_custom_fields($customfields);
+
 			$div->setClass('column span8');
 		});
 
@@ -89,6 +92,7 @@ echo Form::make('div',function($form)
 
 				$div->button(trans('ravel::content.save'))->class('button')->ng_click('submit()','ng-click');
 				$div->button(trans('ravel::content.cancel'))->class('button')->ng_click('cancel()','ng-click');
+				$div->button(trans('ravel::form.delete'))->class('button')->ng_click('delete()','ng-click');
 
 				$div->setClass('column-panel');
 			});

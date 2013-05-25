@@ -3,7 +3,7 @@
 echo Form::make('div',function($form)
 {
 
-	$form->box_panel(trans('ravel::content.create_post'),function($form)
+	$form->box_panel(trans('ravel::content.update_page'),function($form)
 	{
 
 		$form->div(function($div)
@@ -14,7 +14,7 @@ echo Form::make('div',function($form)
 
 			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea');
 
-			$customfields = Config::get('ravel::content.custom_fields.post');
+			$customfields = Config::get('ravel::content.custom_fields.page');
 			$div->ng_custom_fields($customfields);
 
 			$div->setClass('column span8');
@@ -32,7 +32,7 @@ echo Form::make('div',function($form)
 					'Submitted'	=> 'Submitted'
 				);
 
-				//status of the post
+				//status of the page
 				$div->select('status',trans('ravel::content.status'))->options($options)->ng_model('item.status','ng-model');
 				
 
@@ -41,12 +41,13 @@ echo Form::make('div',function($form)
 
 
 
-				//allow comments submission to this post				
+				//allow comments submission to this page				
 				$div->fieldset(function($div)
 				{
 					$div->legend(trans('ravel::content.comment_settings'));
 
-					$div->checkbox('allow_comments')->ng_model('item.allow_comments','ng-model');
+					$div->checkbox('allow_comments')->ng_model('item.allow_comments','ng-model')
+						->ng_checked('item.allow_comments','ng-checked');
 					$div->span(trans('ravel::content.allow_comments'));
 
 					$div->div(function($div)
@@ -63,13 +64,14 @@ echo Form::make('div',function($form)
 				{
 					$div->legend(trans('ravel::content.security'));
 
-					$div->checkbox('locked_content')->ng_model('item.locked_content','ng-model');
+					$div->checkbox('locked_content')->ng_model('item.content_locked','ng-model')
+						->ng_checked('item.content_locked','ng-checked');
 					$div->span(trans('ravel::content.enable'));
 
 					$div->div(function($div)
 					{
 						$div->password('content_password',trans('ravel::content.content_locked'))->ng_model('item.content_password');
-						$div->setRootAttr('ng-show','item.locked_content');
+						$div->setRootAttr('ng-show','item.content_locked');
 					});
 
 				});
@@ -90,6 +92,7 @@ echo Form::make('div',function($form)
 
 				$div->button(trans('ravel::content.save'))->class('button')->ng_click('submit()','ng-click');
 				$div->button(trans('ravel::content.cancel'))->class('button')->ng_click('cancel()','ng-click');
+				$div->button(trans('ravel::form.delete'))->class('button')->ng_click('delete()','ng-click');
 
 				$div->setClass('column-panel');
 			});

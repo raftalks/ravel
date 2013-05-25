@@ -4,7 +4,7 @@ class Contentmeta extends EloquentBaseModel
 {
 	protected $table = 'contentmetas';
 
-	protected $fillable = array('content_id','metakey','metavalue');
+	protected $fillable = array('content_id','metakey','metavalue','content_type');
 
 	public $timestamps = false;
 

@@ -95,7 +95,14 @@ abstract class ResourceApiBase extends RavelBaseController
 	 */
 	public function destroy($id)
 	{
-		$response = $this->resource->delete($id);
+		
+		if($this->resource->delete($id))
+		{
+			$response = null;
+		} else
+		{
+			$response = false;
+		}
 		return $this->responseMessage($response);
 	}
 

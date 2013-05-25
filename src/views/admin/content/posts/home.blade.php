@@ -269,22 +269,27 @@
     }
 
 
-		//delete
-		$scope.delete = function()
-		{
-
-
-		}
+	//delete
+	$scope.delete = function()
+	{
+        var selected = $scope.item;
+        $scope.item.$remove(function(data, response)
+        {
+            var index = $scope.recordset.indexOf(selected);
+            $scope.recordset.splice(index, 1);
+            $scope.gotopage('posts/table');
+        });
+	}
 
 
 	//Form Actions
 
-		$scope.cancel = function()
-		{
+	$scope.cancel = function()
+	{
         $scope.insertItem = true;
         $scope.item = {};
         $scope.gotopage('posts/table');
-		}
+	}
 
 
     //process submit action
@@ -338,6 +343,5 @@
 	}
 
 </script>
-
 
 @stop

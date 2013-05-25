@@ -382,8 +382,16 @@ Form::macro('input_checkbox', function($name, $label, $checked=false, $attr = ar
 			$form->setClass('error');
 		}
 
-		$form->checkbox($name)->id($name)->class('normal-check')->setAttributes($attr);
-		$form->label($label)->for($name);
+		$form->checkbox($name)->setAttributes($attr);
+		
+		if(isset($attr['id']))
+		{
+			$form->label($label)->for($attr['id']);
+		} else
+		{
+			$form->span($label);
+		}
+
 		$form->show_input_error($name);
 
 		$form->setClass('input');
@@ -394,14 +402,14 @@ Form::macro('input_checkbox', function($name, $label, $checked=false, $attr = ar
 
 
 
-Form::macro('input_radio', function($name, $id, $label, $checked=false, $attr = array())
+Form::macro('input_radio', function($name, $label, $checked=false, $attr = array())
 {
 	if($checked)
 	{
 		$attr['checked'] = true;
 	}
 	
-	return Form::template('div',function($form) use ($name, $id, $label, $attr)
+	return Form::template('div',function($form) use ($name, $label, $attr)
 	{
 		if(have_error($form, $name))
 		{
@@ -409,8 +417,16 @@ Form::macro('input_radio', function($name, $id, $label, $checked=false, $attr = 
 			$form->setClass('error');
 		}
 
-		$form->radio($name)->id($id)->class('normal-radio')->setAttributes($attr);
-		$form->label($label)->for($id);
+		$form->radio($name)->class('normal-radio')->setAttributes($attr);
+		
+		if(isset($attr['id']))
+		{
+			$form->label($label)->for($attr['id']);
+		} else
+		{
+			$form->span($label);
+		}
+
 		$form->show_input_error($name);
 
 		$form->setClass('input');
@@ -463,7 +479,7 @@ Form::macro('ng_submit_actions',function($submitName='Submit', $CancelBt=true, $
 
 
 
-Form::macro('datepicker', function($name, $label, $value=null, $attr = array(), $type = 'date')
+Form::macro('datepicker', function($name, $label=null, $value=null, $attr = array(), $type = 'date')
 {
 	if(is_null($value) || $value =='')
 	{
@@ -653,4 +669,138 @@ Form::macro('sub_section',function($title, $callback)
 	});
 });
 
+
+//Custom Fields panel
+Form::macro('custom_field', function($name, $attr)
+{
+	return Form::template('div', function($form) use ($name, $attr)
+	{
+		$label = isset($attr['label']) ? $attr['label'] : null;
+		$fieldType = isset($attr['type']) ? $attr['type'] : 'text';
+		$options = isset($attr['options']) ? $attr['options'] : array();
+		$attributes = isset($attr['attr']) ? $attr['attr'] : array();
+		
+
+		switch($fieldType)
+		{
+			case 'ng_datepicker':	
+				$customField = true;
+				$model = isset($attributes['ng-model']) ? $attributes['ng-model'] : 'item.'.$name;
+				$form->ng_datepicker($name, $label, $model, null, $attributes);
+			break;
+
+			case 'datepicker':
+				$customField = true;
+				$form->datepicker($name, $label, null, $attributes);
+			break;
+
+			case 'input_select':
+				$customField = true;
+				$form->input_select($name, $label, $options, null, $attributes);
+			break;
+
+			case 'multi_select':
+				$customField = true;
+				$form->multi_select($name, $label, $options, null, $attributes);
+			break;
+
+			case 'input_radio':
+				$customField = true;
+				$form->input_radio($name, $label, false, $attributes);
+			break;
+
+			case 'input_checkbox':
+				$customField = true;
+				if(isset($attributes['ng-model']))
+				{
+					$ngmodel = $attributes['ng-model'];
+					$attributes['ng-true-value'] = '1';
+					$attributes['ng-false-value'] = '0';
+					$attributes['ng-checked'] = "$ngmodel == 1";
+				}
+
+				$form->input_checkbox($name, $label, false, $attributes);
+			break;
+
+			case 'input_password_fill':
+				$customField = true;
+				$form->input_password_fill($name, $label, false, $attributes);
+			break;
+
+			case 'input_password':
+				$customField = true;
+				$form->input_password($name, $label, $attributes);
+			break;
+
+			case 'input_text_large':
+			case 'input_text_small':
+			case 'input_text_fill':
+			case 'input_text':
+			case 'input_number':
+			case 'input_textarea':
+				$customField = true;
+				$form->$fieldType($name, $label, null, $attributes);
+			break;
+
+
+			default:
+				$customField = false;
+			break;
+		}
+
+		if($customField == false)
+		{
+			if(!empty($options))
+			{
+				$form->$fieldType($name, $label)->options($options)->setAttributes($attributes);
+			} else
+			{
+				$form->$fieldType($name, $label)->setAttributes($attributes);
+			}
+		}
+		
+		
+	});
+
+});
+
+
+
+Form::macro('custom_fields', function($fields)
+{
+	return Form::template('div',function($form) use ($fields)
+	{
+			foreach($fields as $name => $attr)
+			{
+				$form->custom_field($name, $attr, false);
+			}
+	});
+});
+
+
+Form::macro('ng_custom_fields', function($fields, $angularRootItem = 'item')
+{
+	return Form::template('div',function($form) use ($fields, $angularRootItem)
+	{
+			foreach($fields as $name => $attr)
+			{
+				if(is_array($attr))
+				{
+					if(!isset($attr['attr']))
+					{
+						$attr['attr'] = array();
+					}
+
+					if(!isset($attr['attr']['ng-model']))
+					{
+						$attr['attr']['ng-model'] = $angularRootItem .'.'.$name;
+					}
+
+				}
+				
+
+				$form->custom_field($name, $attr);
+			}
+	});
+});
 

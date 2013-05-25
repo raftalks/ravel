@@ -52,6 +52,7 @@ echo Form::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
 			{
 				$div->button(trans('ravel::form.save'))->class('button')->ng_click('submit()','ng-click');
 				$div->button(trans('ravel::form.cancel'))->class('button')->ng_click('cancel()','ng-click');
+				$div->button(trans('ravel::form.delete'))->class('button')->ng_click('delete()','ng-click');
 
 				$div->setClass('column-panel');
 			});
