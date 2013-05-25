@@ -5,6 +5,8 @@ class Usermodel extends User {
 	
 	protected $fillableFields = array('email', 'password', 'username', 'usergroup_id');
 
+	protected $softDelete = true;
+	
 	protected $validation_rules = array(
 
 			'username' 		=> 'required',

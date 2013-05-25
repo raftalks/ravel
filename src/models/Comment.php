@@ -7,7 +7,7 @@ class Comment extends EloquentBaseModel
 
 	protected $fillable = array();
 
-
+	protected $softDelete = true;
 
 	public function content()
 	{

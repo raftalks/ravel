@@ -21,6 +21,7 @@ class EloquentBaseModel extends Eloquent
 	protected $validation_object = false;
 
 
+
 	public function setTableName($name)
 	{
 		$this->table = $name;

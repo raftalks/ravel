@@ -4,6 +4,8 @@ class ContentModel extends EloquentBaseModel
 {
 	protected $table = 'contents';
 
+	protected $softDelete = true;
+
 	protected $fillable = array('lang',
 								'author_id',
 								'author_name',

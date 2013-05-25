@@ -4,6 +4,8 @@ class CategoryModel extends EloquentBaseModel
 {
 	protected $table = 'categories';
 
+	protected $softDelete = true;
+
 	protected $fillable = array('name',
 								'list_layout',
 								'item_layout',
