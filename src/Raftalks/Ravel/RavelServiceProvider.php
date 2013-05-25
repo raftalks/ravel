@@ -189,7 +189,7 @@ class RavelServiceProvider extends ServiceProvider {
 	/** register the custom commands **/
 	public function registerCommands()
 	{
-		$commands = array('Ravel','RavelRoles','RavelInstall');
+		$commands = array('Ravel','RavelRoles','RavelInstall','RavelUpdate');
 
 		foreach ($commands as $command)
 		{
@@ -197,7 +197,7 @@ class RavelServiceProvider extends ServiceProvider {
 		}
 
 		$this->commands(
-			'command.ravel','command.ravel.sync_roles','command.ravel.install'
+			'command.ravel','command.ravel.sync_roles','command.ravel.install','command.ravel.update'
 		);
 
 	}
@@ -226,6 +226,14 @@ class RavelServiceProvider extends ServiceProvider {
 		$this->app['command.ravel.install'] = $this->app->share(function($app)
 		{
 			return new RavelInstallCommand();
+		});
+	}
+
+	public function registerRavelUpdateCommand()
+	{
+		$this->app['command.ravel.update'] = $this->app->share(function($app)
+		{
+			return new RavelUpdateCommand();
 		});
 	}
 
