@@ -114,5 +114,4 @@ echo Form::make('div',function($form)
 	});
 
 });
-?>
-{{ item }}
+

@@ -50,7 +50,7 @@ php artisan ravel:update
 ```
 
 ### Setting up custom fields to Post and Page
-- Check the config file under the package path vendor/raftalks/ravel/src/config/content.php
+- Check the config file under the package path app/config/packages/raftalks/ravel/content.php
 ```php
 'custom_fields' => array(
 
