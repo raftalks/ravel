@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateMenuLinksTable extends Migration {
@@ -11,7 +12,7 @@ class CreateMenuLinksTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('links', function($table)
+		Schema::create('links', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('menu_id')->unsigned();

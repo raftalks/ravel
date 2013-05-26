@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateMediaTable extends Migration {
@@ -11,7 +12,7 @@ class CreateMediaTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('medias', function($table)
+		Schema::create('medias', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('media_type'); // IMAGE FILE | VIDEO FILE | YOUTUBE

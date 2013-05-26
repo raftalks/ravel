@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateMenusTable extends Migration {
@@ -11,7 +12,7 @@ class CreateMenusTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('menus', function($table)
+		Schema::create('menus', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name');

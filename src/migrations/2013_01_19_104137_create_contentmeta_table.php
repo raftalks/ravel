@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateContentmetaTable extends Migration {
@@ -11,7 +12,7 @@ class CreateContentmetaTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('contentmetas', function($table)
+		Schema::create('contentmetas', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('content_id')->unsigned();

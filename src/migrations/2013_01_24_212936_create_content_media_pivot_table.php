@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateContentMediaPivotTable extends Migration {
@@ -11,7 +12,7 @@ class CreateContentMediaPivotTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('content_media', function($table)
+		Schema::create('content_media', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('content_id')->unsigned();

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateUsergroupsTable extends Migration {
@@ -11,7 +12,7 @@ class CreateUsergroupsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('usergroups', function($table)
+		Schema::create('usergroups', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('group');
