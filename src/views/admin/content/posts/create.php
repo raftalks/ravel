@@ -2,6 +2,7 @@
 
 echo Form::make('div',function($form)
 {
+	//$form->share('categories', $post_categories);
 
 	$form->box_panel(trans('ravel::content.create_post'),function($form)
 	{
@@ -73,6 +74,16 @@ echo Form::make('div',function($form)
 					});
 
 				});
+
+
+				$div->fieldset(function($div)
+				{
+					$div->setClass('fill-up');
+					$div->legend(trans('ravel::content.post_categories'));
+
+					$div->ng_multi_select('post_categories',null, 'item.categories','post_categories',array('class'=>'fill-up'));
+					
+				});
 				
 
 				$div->br();
@@ -103,3 +114,5 @@ echo Form::make('div',function($form)
 	});
 
 });
+?>
+{{ item }}

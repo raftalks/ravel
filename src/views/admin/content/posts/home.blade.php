@@ -178,11 +178,11 @@
 	{
 	
 	//attributes
-		$scope.recordset = [];
+	$scope.recordset = [];
 
-		$scope.item = {};
+	$scope.item = {};
 
-		$scope.insertItem = true;
+	$scope.insertItem = true;
 
     $scope.show_template = 'posts/table';
 
@@ -193,6 +193,9 @@
     $scope.currentPage = 0;
 
     $scope.pageNumber = 1;
+
+    $scope.post_categories = <?php echo json_encode($post_categories); ?>
+
 
     $scope.$on('switchPage',function(evt, pageNum)
     {

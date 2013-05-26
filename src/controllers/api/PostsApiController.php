@@ -12,4 +12,5 @@ class PostsApiController extends ContentApi
 		parent::__construct();
 	}
 
+
 }

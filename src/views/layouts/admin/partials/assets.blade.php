@@ -17,7 +17,12 @@
 		<!-- jbar css style -->
 		<link rel="stylesheet" href="<?php echo admin_asset('admin/jbar/css/style.css');?>" type="text/css" media="screen" />
 	  
-
+		<!-- angularjs ui -->
+		<link rel="stylesheet" href="<?php echo admin_asset('admin/css/angularjsui/angular-ui.min.css');?>" type="text/css" media="screen" />
+		
+		<!--select2 -->
+		<link rel="stylesheet" href="<?php echo admin_asset('admin/scripts/angularjsui/select2/select2.css');?>" type="text/css" media="screen" />
+		
 		<!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
 		<link rel="stylesheet" href="<?php echo admin_asset('admin/css/invalid.css');?>" type="text/css" media="screen" />	
 		
@@ -51,11 +56,14 @@
 		<!-- jQuery -->
 		<script type="text/javascript" src="<?php echo admin_asset('admin/scripts/jquery.min.js');?>"></script>
 		<script type="text/javascript" src="<?php echo admin_asset('admin/scripts/jquery-ui-1.10.0.smoothness.min.js');?>"></script>
-		
+		<script type="text/javascript" src='<?php echo admin_asset('admin/scripts/angularjsui/select2/select2.min.js');?>'></script>
 		<!-- angularjs -->
 		<script type="text/javascript" src='<?php echo admin_asset('admin/scripts/angular.min.js');?>'></script>
+		
 		<script type="text/javascript" src='<?php echo admin_asset('admin/scripts/angular-resource.min.js');?>'></script>
-
+		<script type="text/javascript" src='<?php echo admin_asset('admin/scripts/angularjsui/angular-select2.js');?>'></script>
+		<script type="text/javascript" src='<?php echo admin_asset('admin/scripts/angularjsui/angular-ui.min.js');?>'></script>
+		
 		<!-- jQuery Configuration -->
 		<script type="text/javascript" src="<?php echo admin_asset('admin/scripts/simpla.jquery.configuration.js');?>"></script>
 		

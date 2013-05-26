@@ -75,6 +75,14 @@ echo Form::make('div',function($form)
 					});
 
 				});
+
+				$div->fieldset(function($div)
+				{
+					$div->legend(trans('ravel::content.post_categories'));
+
+					$div->ng_multi_select('post_categories',null, 'item.categories','post_categories',array('class'=>'fill-up','initSelection'=>'[{13}]'));
+
+				});
 				
 
 				$div->br();
@@ -106,3 +114,4 @@ echo Form::make('div',function($form)
 	});
 
 });
+

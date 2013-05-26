@@ -237,12 +237,12 @@
         $scope.gotopage('pages/view');
 		}
 
-    $scope.edit = function(item)
-    {
-        $scope.insertItem = false;
-        $scope.item = new DataSource(item);
-        $scope.gotopage('pages/edit');
-    }
+	    $scope.edit = function(item)
+	    {
+	        $scope.insertItem = false;
+	        $scope.item = new DataSource(item);
+	        $scope.gotopage('pages/edit');
+	    }
 
 		//update item
 		$scope.update = function()

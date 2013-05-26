@@ -265,26 +265,26 @@ a.remove-link:hover {
 
 #main-content ul,
 #main-content ol {
-                padding: 10px 0;
+                padding: 0;
                 }
 
 /* Unordered List */
 
-#main-content ul li {
+/*#main-content ul li {
                 background: url('../images/icons/bullet_black.png') center left no-repeat;
                 padding: 4px 0 4px 20px;
-                }
+                }*/
 
 /* Ordered List */
 
-#main-content ol {
+/*#main-content ol {
                 padding: 0 0 0 24px;
                 }
 
 #main-content ol li {
                 list-style: decimal;
                 padding: 4px 0;
-                }
+                }*/
 
 /*************** Content Box ***************/
 
@@ -820,3 +820,6 @@ body#login {
   z-index: 99;
 }
 
+.fill-up{
+    width:100%;
+}

@@ -548,6 +548,19 @@ Form::macro('multi_select',function($name, $label, $options, $value=null, $attr=
 });
 
 
+Form::macro('ng_multi_select', function($name, $label, $ng_model, $ng_options, $attr=array())
+{
+	return Form::template('div', function($form) use($name, $label, $ng_model, $ng_options, $attr)
+	{
+		$form->setClass('fill-up');
+		$ng_options = 'xitem.id as xitem.name for xitem in '.$ng_options;
+		$form->select($name, $label)->select2('','ui-select2')->ng_options($ng_options,'ng-options')->ng_model($ng_model, 'ng-model')->class('ng_multi_select')->multiple(null)->setAttributes($attr);
+
+	});
+});
+
+
+
 Form::macro('input_select',function($name, $label, $options, $value=null, $attr=array())
 {
 	return Form::template('div',function($form) use($name, $label, $options, $value, $attr)
@@ -708,6 +721,7 @@ Form::macro('custom_field', function($name, $attr)
 				$customField = true;
 				$form->input_radio($name, $label, false, $attributes);
 			break;
+
 
 			case 'input_checkbox':
 				$customField = true;

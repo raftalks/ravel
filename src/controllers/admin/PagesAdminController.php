@@ -9,6 +9,7 @@ class PagesAdminController extends AdminController
 	{
 
 		$posts = Post::get();
+		
 		if(!$posts)
 		{
 			$posts = app('EmptyCollection');

@@ -10,6 +10,15 @@ class CategoryModel extends EloquentBaseModel
 								'list_layout',
 								'item_layout',
 								'lang');
+	protected $hidden = array(
+			'list_layout',
+			'item_layout',
+			'lang',
+			'created_at',
+			'updated_at',
+			'deleted_at',
+			'pivot'
+		);
 
 	protected $validation_rules = array(
 

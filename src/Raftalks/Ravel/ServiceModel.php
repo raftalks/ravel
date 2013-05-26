@@ -58,6 +58,11 @@ abstract class ServiceModel
 		return $this->acl;
 	}
 
+	public function getLocale()
+	{
+		return Config::get('app.locale');
+	}
+
 
 	public function setModule($module)
 	{

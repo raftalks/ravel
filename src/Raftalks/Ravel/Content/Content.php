@@ -102,6 +102,7 @@ abstract class Content extends ServiceModel
 				
 				$result = $model->with(array(
 						'contentmetas',
+						'categories',
 						'author'	=> function($query)
 						{
 							$query->select('users.id','users.username');
@@ -139,6 +140,16 @@ abstract class Content extends ServiceModel
 					$value = $citem['metavalue'];
 					$item->$fieldname = $value;
 				}
+
+				$categories = $item->categories;
+				//set only category ids
+				$selectedCats = array();
+				foreach($categories as $cat)
+				{
+					$selectedCats[] = $cat['id'];
+				}
+				unset($item->categories);
+				$item->categories = $selectedCats;
 			});
 
 		}
@@ -280,6 +291,7 @@ abstract class Content extends ServiceModel
 	protected function afterInsert($model, $data)
 	{
 		$this->saveContentMeta($data, $model);
+		$this->saveContentCategories($data, $model);
 	}
 
 
@@ -316,6 +328,15 @@ abstract class Content extends ServiceModel
 	}
 
 
+
+	public function saveContentCategories($data, $model, $type = 'post')
+	{
+		if(!$this->contentType == $type){ return true;}
+
+		$model->categories()->sync($data['categories']);
+	}
+
+
 	public function save($data, $id, $callback=null)
 	{
 
@@ -343,6 +364,7 @@ abstract class Content extends ServiceModel
 	protected function afterSave($model, $data)
 	{
 		$this->saveContentMeta($data, $model);
+		$this->saveContentCategories($data, $model);
 	}
 
 

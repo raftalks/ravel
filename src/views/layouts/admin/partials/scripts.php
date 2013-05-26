@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	//APP MODULE
-	var App = angular.module('app', ['ngResource'], function ($routeProvider, $locationProvider, $httpProvider) {
+	var App = angular.module('app', ['ngResource','ui'], function ($routeProvider, $locationProvider, $httpProvider) {
 
     var interceptor = ['$rootScope', '$q', function (scope, $q) {
 
@@ -77,7 +77,6 @@ App.directive('ngdatepicker',function($parse)
 
 
 
-
 //jbar notification
 function showWarning(message) {
   showMessage(message, 'warning');
@@ -114,5 +113,11 @@ function show_error_message(message)
   showError(message);
 
 }
+
+
+  $(".ng_multi_select").select2(); 
+
+   
+
 
 </script>

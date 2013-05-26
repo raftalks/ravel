@@ -62,5 +62,16 @@ class ContentModel extends EloquentBaseModel
 	{
 		return $this->hasMany('Comment');
 	}
+
+
+
+	/**
+	 * Returns Posts related categories
+	 * @return object CategoryModel
+	 */
+	public function categories()
+	{	
+		return $this->belongsToMany('CategoryModel','category_content','content_id','category_id');	
+	}
 	
 }
