@@ -31,5 +31,11 @@
             "Raftalks\\Ravel": "src/"
         }
     },
+    "scripts": {
+        "post-update-cmd": [
+            "php artisan ravel:update"
+        ]
+    },
+
     "minimum-stability": "dev"
 }
