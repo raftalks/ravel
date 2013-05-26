@@ -50,6 +50,7 @@ class RavelUpdateCommand extends Command {
 		}
 		else
 		{	
+			$this->call('config:publish',array('package'=>'raftalks/ravel'));
 			$this->call('asset:publish',array('package'=>'raftalks/ravel'));
 			$this->call('migrate',array('--package'=>'raftalks/ravel'));
 		}
