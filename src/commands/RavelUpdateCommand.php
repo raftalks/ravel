@@ -1,9 +1,9 @@
 <?php namespace Raftalks\Ravel;
 
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Config;
 
 class RavelUpdateCommand extends Command {
 
@@ -55,6 +55,7 @@ class RavelUpdateCommand extends Command {
 			$this->call('migrate',array('--package'=>'raftalks/ravel'));
 		}
 
+		$this->setupUploadDirectory();
 	
 		$this->info('Successfully updated Ravel');
 	}
@@ -64,6 +65,43 @@ class RavelUpdateCommand extends Command {
 	{
 		$path = __FILE__;
 		return str_contains(strtolower($path),'/workbench/raftalks/ravel/');
+	}
+
+
+	public function setupUploadDirectory()
+	{
+		$publicPath = app()->make('path.public');
+		$ConfigUploadPath = app('config')->get('ravel::media.media_storage_path');
+		$uploadPath = $publicPath .'/'. $ConfigUploadPath;
+
+		if ( ! app('files')->isDirectory($uploadPath))
+		{
+			$dirs = explode('/', $ConfigUploadPath);
+			$findPath = $publicPath;
+			$realpath = '/public';
+			$filesCreated = false;
+			foreach($dirs as $dir)
+			{
+				if(!is_null($dir))
+				{
+					$findPath = $findPath . '/' . $dir;
+					$realpath = $realpath . '/' . $dir;
+					if( ! app('files')->isDirectory($findPath))
+					{
+						//create path
+						app('files')->makeDirectory($findPath);
+						$filesCreated = true;
+					} 
+				}
+				
+			}
+
+			if($filesCreated)
+			{
+				$this->info('Created media upload directory : '.$realpath);
+			}
+		}
+
 	}
 
 }
