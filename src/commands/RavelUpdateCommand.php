@@ -4,7 +4,6 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Raftalks\Ravel\ComposerCommand;
 
 class RavelUpdateCommand extends Command {
 
@@ -51,7 +50,6 @@ class RavelUpdateCommand extends Command {
 		}
 		else
 		{	
-			$this->runComposerPackageUpdate();
 			$this->call('asset:publish',array('package'=>'raftalks/ravel'));
 			$this->call('migrate',array('--package'=>'raftalks/ravel'));
 		}
@@ -65,14 +63,6 @@ class RavelUpdateCommand extends Command {
 	{
 		$path = __FILE__;
 		return str_contains(strtolower($path),'/workbench/raftalks/ravel/');
-	}
-
-
-	public function runComposerPackageUpdate()
-	{
-		$path = app_path();
-		$cmd = new ComposerCommand('raftalks/ravel',$path);
-		$cmd->runPackageUpdate();
 	}
 
 }
