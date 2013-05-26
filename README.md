@@ -49,6 +49,29 @@ php composer.phar update
 php artisan ravel:update
 ```
 
+### Setting up custom fields to Post and Page
+- Check the config file under the package path vendor/raftalks/ravel/src/config/content.php
+```php
+'custom_fields' => array(
+
+			//'example'
+			//'post'		=> array(
+							// 		"{metakey}" => array('label'=>'{name}','type'=>'{text}', 'attr'=>array(), 'options'=>array())
+							// )
+
+			'post'			=> array(
+								'somefield' => array('label'=>'custom field','type'=>'input_checkbox'),
+								'custom_field3' => array('label'=>'custom field','type'=>'ng_datepicker'),
+								'custom_field2' => array('label'=>'custom field2','type'=>'select','options'=>array(1=>'test',2=>'two',3=>'three',4=>'four'))
+								),
+
+			'page'			=> array(),
+
+			'attachement'	=> array(),
+
+		),
+```
+
 ### Admin Panel
 - By default the CMS admin panel is available on http://www.domain.com/admin and you can change the base url to admin panel by changing the app config file of the package.
 
