@@ -19,7 +19,7 @@ class RavelUpdateCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Update Ravel including migrations';
+	protected $description = 'Update Ravel including migrations and assets';
 
 	/**
 	 * Create a new command instance.
