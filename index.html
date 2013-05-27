@@ -31,7 +31,87 @@
         <hr>
 
         <section id="main_content">
-          <p>...updates coming soon.</p>
+          <h4>STATUS: UNDER DEVELOPMENT</h4>
+
+<h2>CMS Starter Package for Laravel 4</h2>
+
+<p><img src="http://screencloud.net/img/screenshots/459073add52925cad259ee3cdf4a969f.png" alt="Screenshot"></p>
+
+<h3>How to Install</h3>
+
+<ul>
+<li>Install L4 App from Github ( Watch this if you need to know how : <a href="http://net.tutsplus.com/tutorials/php/how-to-setup-laravel-4/">http://net.tutsplus.com/tutorials/php/how-to-setup-laravel-4/</a>)</li>
+<li>In your app composer.json file, add:</li>
+</ul><div class="highlight"><pre>    <span class="s2">"require"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"raftalks/ravel"</span><span class="o">:</span> <span class="s2">"*"</span>
+    <span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>Add Ravel Service Provider to the app/config/app.php file under the array key "providers" as shown below</li>
+</ul><div class="highlight"><pre>
+<span class="s1">'providers'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+
+        <span class="s1">'Raftalks\Ravel\RavelServiceProvider'</span><span class="p">,</span>
+
+<span class="p">)</span>
+
+</pre></div>
+
+<ul>
+<li>Configure your database settings in the L4 app/config/database.php file</li>
+<li>Open your terminal in the L4 App root directory and run <code>php composer.phar update</code> command</li>
+<li>And run the following command in the terminal to start installing the CMS package</li>
+</ul><pre><code> php artisan ravel:install
+</code></pre>
+
+<ul>
+<li>The above command will publish all the assets and run the migration and seeds</li>
+<li>Before using Ravel CMS, you may want to do some configuration changes like setup a username and password, look inside vendor/raftalks/ravel/src/config/app.php file, by default the username is "admin" and password is "ravel".</li>
+</ul><h3>How to update the package</h3>
+
+<ul>
+<li>Use the following composer update command to download the updates 
+<code>
+php composer.phar update
+</code>
+</li>
+<li>and after downloading the updates, run the following artisan command to make sure migrations and package assets gets updated
+<code>
+php artisan ravel:update
+</code>
+</li>
+</ul><h3>Setting up custom fields to Post and Page</h3>
+
+<ul>
+<li>
+<p>Check the config file under the package path app/config/packages/raftalks/ravel/content.php</p>
+
+<div class="highlight"><pre><span class="s1">'custom_fields'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+
+        <span class="c1">//'example'</span>
+        <span class="c1">//'post'        =&gt; array(</span>
+                        <span class="c1">//      "{metakey}" =&gt; array('label'=&gt;'{name}','type'=&gt;'{text}', 'attr'=&gt;array(), 'options'=&gt;array())</span>
+                        <span class="c1">// )</span>
+
+        <span class="s1">'post'</span>          <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                            <span class="s1">'somefield'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'label'</span><span class="o">=&gt;</span><span class="s1">'custom field'</span><span class="p">,</span><span class="s1">'type'</span><span class="o">=&gt;</span><span class="s1">'input_checkbox'</span><span class="p">),</span>
+                            <span class="s1">'custom_field3'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'label'</span><span class="o">=&gt;</span><span class="s1">'custom field'</span><span class="p">,</span><span class="s1">'type'</span><span class="o">=&gt;</span><span class="s1">'ng_datepicker'</span><span class="p">),</span>
+                            <span class="s1">'custom_field2'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'label'</span><span class="o">=&gt;</span><span class="s1">'custom field2'</span><span class="p">,</span><span class="s1">'type'</span><span class="o">=&gt;</span><span class="s1">'select'</span><span class="p">,</span><span class="s1">'options'</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="o">=&gt;</span><span class="s1">'test'</span><span class="p">,</span><span class="mi">2</span><span class="o">=&gt;</span><span class="s1">'two'</span><span class="p">,</span><span class="mi">3</span><span class="o">=&gt;</span><span class="s1">'three'</span><span class="p">,</span><span class="mi">4</span><span class="o">=&gt;</span><span class="s1">'four'</span><span class="p">))</span>
+                            <span class="p">),</span>
+
+        <span class="s1">'page'</span>          <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
+
+        <span class="s1">'attachement'</span>   <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
+
+    <span class="p">),</span>
+</pre></div>
+</li>
+</ul><h3>Admin Panel</h3>
+
+<ul>
+<li>By default the CMS admin panel is available on <a href="http://www.domain.com/admin">http://www.domain.com/admin</a> and you can change the base url to admin panel by changing the app config file of the package.</li>
+</ul><p>Documentation will be updated soon</p>
         </section>
 
         <footer>
