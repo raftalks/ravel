@@ -7,4 +7,9 @@ return array(
 	'media_storage_path'	=> 'uploads/ravel',
 
 	'max_file_size'			=> 1000, //in kb
+
+	'image_thumb_width'		=> 100, // in px
+
+	'image_thumb_height'	=> 100, // in px
+
 );

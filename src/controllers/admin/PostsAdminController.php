@@ -5,6 +5,9 @@ class PostsAdminController extends AdminController
 
 	protected $title = 'Posts';
 
+	protected $moduleName = 'Contents';
+	
+
 	public function getIndex()
 	{
 		$locale = config::get('app.locale');

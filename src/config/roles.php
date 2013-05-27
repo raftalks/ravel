@@ -13,6 +13,7 @@ return array(
 
 				'global',
 				'contents',
+				'medias',
 				'categories',
 				'settings'
 

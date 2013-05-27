@@ -34,19 +34,8 @@ return array(
 
 		'media'		=> array(
 						'label'		=>'Media', 
-						'link'		=>'#',
-						'children'	=> array(
-
-										'create' => array(
-												'label' => 'New Media',
-												'link'	=> '#',
-												),
-
-										'list' => array(
-												'label' => 'All Media',
-												'link'	=> '#',
-												),
-										)
+						'link'		=>action('MediaAdminController@getIndex'),
+						
 						),
 
 

@@ -3,24 +3,23 @@
 
 <div ng-include='show_template'></div>
 
+    <script type="text/ng-template" id='pages/table'>
+      @include('ravel::admin.content.pages.table')
+    </script>
 
+    <script type="text/ng-template" id='pages/create'>
+     @include('ravel::admin.content.pages.create')
+    </script>
 
-<script type="text/ng-template" id='pages/table'>
-  @include('ravel::admin.content.pages.table')
-</script>
+    <script type="text/ng-template" id='pages/edit'>
+     @include('ravel::admin.content.pages.edit')
+    </script>
 
-<script type="text/ng-template" id='pages/create'>
- @include('ravel::admin.content.pages.create')
-</script>
-
-<script type="text/ng-template" id='pages/edit'>
- @include('ravel::admin.content.pages.edit')
-</script>
-
-<script type="text/ng-template" id='pages/view'>
- @include('ravel::admin.content.pages.view')
-</script>
-
+    <script type="text/ng-template" id='pages/view'>
+     @include('ravel::admin.content.pages.view')
+    </script>
+    
+</div>
 @stop
 
 @section('javascripts')

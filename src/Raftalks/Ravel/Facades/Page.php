@@ -7,6 +7,6 @@ class Page extends Facade {
 	 *
 	 * @return string
 	 */
-	protected static function getFacadeAccessor() { return 'page'; }
+	protected static function getFacadeAccessor() { return 'Page'; }
 
 }

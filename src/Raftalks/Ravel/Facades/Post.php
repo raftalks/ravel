@@ -7,6 +7,6 @@ class Post extends Facade {
 	 *
 	 * @return string
 	 */
-	protected static function getFacadeAccessor() { return 'post'; }
+	protected static function getFacadeAccessor() { return 'Post'; }
 
 }

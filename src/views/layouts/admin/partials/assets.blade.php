@@ -67,7 +67,7 @@
 		<!-- jQuery Configuration -->
 		<script type="text/javascript" src="<?php echo admin_asset('admin/scripts/simpla.jquery.configuration.js');?>"></script>
 		
-		<!-- Tinymce -->
+		<!-- CKEditor -->
 		<script type="text/javascript" src="<?php echo admin_asset('admin/scripts/ckeditor/ckeditor.js');?>"></script>
 		<script type="text/javascript" src="<?php echo admin_asset('admin/scripts/angular-ckeditor.js');?>"></script>
 

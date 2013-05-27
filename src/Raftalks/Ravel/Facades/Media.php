@@ -7,6 +7,6 @@ class Media extends Facade {
 	 *
 	 * @return string
 	 */
-	protected static function getFacadeAccessor() { return 'media'; }
+	protected static function getFacadeAccessor() { return 'Media'; }
 
 }

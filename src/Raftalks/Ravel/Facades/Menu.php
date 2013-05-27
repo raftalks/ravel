@@ -7,6 +7,6 @@ class Menu extends Facade {
 	 *
 	 * @return string
 	 */
-	protected static function getFacadeAccessor() { return 'menu'; }
+	protected static function getFacadeAccessor() { return 'Menu'; }
 
 }

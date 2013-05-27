@@ -102,7 +102,7 @@ abstract class ServiceModel
 		{
 			return true;
 		}
-		$this->addErrorMessage(ucfirst($action) .' action restricted',403);
+		$this->addErrorMessage(ucfirst($action) .' '. trans('ravel::error.action_restricted'),403);
 		return false;
 	}
 
@@ -205,7 +205,7 @@ abstract class ServiceModel
 		}
 		else
 		{
-			$this->addErrorMessage('Not Found',404);
+			$this->addErrorMessage(trans('ravel::error.no_content_found'),404);
 			return false;
 		}
 

@@ -56,6 +56,7 @@ return array(
 							'Acl'			=> 'Raftalks\Ravel\Facades\Acl',
 							'Post'			=> 'Raftalks\Ravel\Facades\Post',
 							'Page'			=> 'Raftalks\Ravel\Facades\Page',
+							'Media'			=> 'Raftalks\Ravel\Facades\Media',
 							'PostCategory'	=> 'Raftalks\Ravel\Facades\PostCategory',
 							'Menu'			=> 'Raftalks\Ravel\Facades\Menu',
 							'UsersLibrary'	=> 'Raftalks\Ravel\Facades\UsersLibrary',

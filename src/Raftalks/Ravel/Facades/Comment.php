@@ -7,6 +7,6 @@ class Comment extends Facade {
 	 *
 	 * @return string
 	 */
-	protected static function getFacadeAccessor() { return 'comment'; }
+	protected static function getFacadeAccessor() { return 'Comment'; }
 
 }

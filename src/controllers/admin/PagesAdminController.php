@@ -5,6 +5,8 @@ class PagesAdminController extends AdminController
 
 	protected $title = 'Pages';
 
+	protected $moduleName = 'Contents';
+
 	public function getIndex()
 	{
 
