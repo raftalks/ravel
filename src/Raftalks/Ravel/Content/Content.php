@@ -7,7 +7,7 @@ use Str;
 abstract class Content extends ServiceModel
 {
 
-
+	protected $useContentCategories = false;
 
 	protected $contentType = null;
 
@@ -51,44 +51,60 @@ abstract class Content extends ServiceModel
 
 		if(is_null($callback))
 		{
-			$callback = function($model, $host)
+			$callback = function(&$model, $host)
 			{
+				$model = $model->where('content_type','=',$host->getContentType())
+						->where('lang','=',$host->getLocale())
+						->with(array('contentmetas','categories'));
+
 				if($host->is_guest())
 				{
-					$model->where('status','=','published');
-				}
-
-				$model->with(array('contentmeta'));
-
-				return $model;
-			};
-		}
-
-		return parent::show($id, $callback);
-
-	}
-
-
-
-	public function edit($id, $callback = null)
-	{
-		
-			if(is_null($callback))
-			{
-				$callback = function($model, $host)
+					$model = $model->where('status','=','published');
+				} else
 				{
 					if(!$host->is_moderator())
 					{
-						$model->where('author_id','=',$host->getAuthorId());
+						$model = $model->where('author_id','=',$host->getAuthorId());
 					}
+				}
+			};
+		}
 
-					return $model;
-				};
-			}
-
-			return parent::edit($id, $callback);
+		$item = parent::show($id, $callback);
 		
+		if($item)
+		{
+			$this->prepareContentItem($item);
+		}
+		
+
+		return $item;
+
 	}
+
+
+	// public function edit($id, $callback = null)
+	// {
+		
+	// 		if(is_null($callback))
+	// 		{
+	// 			$callback = function(&$model, $host)
+	// 			{
+	// 				if(!$host->is_moderator())
+	// 				{
+	// 					$model = $model->where('author_id','=',$host->getAuthorId());
+	// 				}
+
+	// 				$model = $model->where('content_type','=',$host->getContentType())
+	// 					->with(array('contentmetas','categories'));
+
+	// 				return $model;
+	// 			};
+	// 		}
+
+	// 		return parent::edit($id, $callback);
+		
+	// }
 
 
 
@@ -97,10 +113,10 @@ abstract class Content extends ServiceModel
 
 		if(is_null($callback))
 		{
-			$callback = function($model,$host)
+			$callback = function(&$model,$host)
 			{
 				
-				$result = $model->with(array(
+				$model = $model->with(array(
 						'contentmetas',
 						'categories',
 						'author'	=> function($query)
@@ -109,20 +125,29 @@ abstract class Content extends ServiceModel
 						}
 					))->where(function($query) use($host)
 					{
-						$query->where('content_type','=',$host->getContentType());
-						if(!$host->is_moderator())
+						$query->where('content_type','=', $host->getContentType())
+							  ->where('lang','=',$host->getLocale());
+
+						if($host->is_guest())
 						{
+							
 							$dateTime = new \DateTime;
 							$now = $dateTime->format('Y-m-d H:i:s');
 
 							// $query->where('status','=','published');
 							$query->where('publish_date','<',$now);
+							$query->where('status','=','published');
+						} else
+						{
+							if(! $host->is_moderator())
+							{
+								//fetch only content belongs to user
+								$query->where('author_id','=',$host->getAuthorId());
+							}
+							
+							
 						}
 					});
-
-				
-
-				return $result;
 
 			};
 						
@@ -131,25 +156,10 @@ abstract class Content extends ServiceModel
 		$result = parent::fetch($page, $take, $callback);
 		if($result)
 		{
-			$result->each(function($item)
+			$host = $this;
+			$result->each(function($item) use ($host)
 			{
-				$customFields = $item->contentmetas;
-				foreach($customFields as $citem)
-				{
-					$fieldname = $citem['metakey'];
-					$value = $citem['metavalue'];
-					$item->$fieldname = $value;
-				}
-
-				$categories = $item->categories;
-				//set only category ids
-				$selectedCats = array();
-				foreach($categories as $cat)
-				{
-					$selectedCats[] = $cat['id'];
-				}
-				unset($item->categories);
-				$item->categories = $selectedCats;
+				$host->prepareContentItem($item);
 			});
 
 		}
@@ -169,7 +179,7 @@ abstract class Content extends ServiceModel
 		return $model->with(array('contentmeta'))
 					->where(function($query) use($host, $callback)
 					{
-							if(!is_null($callback) && is_callable($callback))
+							if(is_closure($callback))
 							{
 								$callback($query, $host);
 							}
@@ -269,15 +279,14 @@ abstract class Content extends ServiceModel
 
 	public function insert($data, $callback=null)
 	{
-		$contentType = $this->contentType;
 		if(is_null($callback))
 		{
-			$host = $this;
-			$callback = function($model) use ($contentType, $host)
+			$callback = function(&$model, $host)
 			{
-				$model->content_type = $contentType;
+				$model->content_type = $host->getContentType();
 				$model->author_id = $host->getAuthorId();
 				$model->slug = $host->makeSlug($model->title);
+				$model->lang = $host->getLocale();
 				return $model;
 			};
 		}
@@ -329,24 +338,28 @@ abstract class Content extends ServiceModel
 
 
 
-	public function saveContentCategories($data, $model, $type = 'post')
+	public function saveContentCategories($data, $model)
 	{
-		if(!$this->contentType == $type){ return true;}
-
-		$model->categories()->sync($data['categories']);
+		if($this->contentUseCategories())
+		{
+			if(isset($data['categories']))
+			{
+				$model->categories()->sync($data['categories']);	
+			}
+		}
+		
 	}
 
 
 	public function save($data, $id, $callback=null)
 	{
 
-		$contentType = $this->contentType;
 		if(is_null($callback))
 		{
-			$host = $this;
-			$callback = function($model) use ($contentType, $id, $host)
+			
+			$callback = function(&$model, $host)
 			{
-				$model->content_type = $contentType;
+				$model->content_type = $host->getContentType();
 				$current_title = $model->title;
 				$original_title = $model->getOriginal('title');
 				if($original_title !== $current_title)
@@ -369,7 +382,41 @@ abstract class Content extends ServiceModel
 
 
 
-	
+	public function contentUseCategories()
+	{
+		return $this->useContentCategories === true;
+	}
+
+
+	public function prepareContentItem(&$item)
+	{
+		if(isset($item->contentmetas))
+		{
+			$customFields = $item->contentmetas;
+			foreach($customFields as $citem)
+			{
+				$fieldname = $citem['metakey'];
+				$value = $citem['metavalue'];
+				$item->$fieldname = $value;
+			}
+			unset($item->contentmetas);
+		}
+		
+		
+		if($this->contentUseCategories())
+		{
+
+			$categories = $item->categories;
+			//set only category ids
+			$selectedCats = array();
+			foreach($categories as $cat)
+			{
+				$selectedCats[] = $cat['id'];
+			}
+			unset($item->categories);
+			$item->categories = $selectedCats;
+		}
+	}
 
 	
 

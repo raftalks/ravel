@@ -6,6 +6,8 @@ class Post extends Content
 {
 
 	protected $contentType = 'post';
+
+	protected $useContentCategories = true;
 	
 
 	public function ContentModel()

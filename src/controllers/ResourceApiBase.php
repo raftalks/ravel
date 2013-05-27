@@ -24,11 +24,13 @@ abstract class ResourceApiBase extends RavelBaseController
 	 */
 	public function index()
 	{
+
 		$pageNum = Request::query('page');
 		$page = is_null($pageNum) ? 1 : (int)$pageNum;
 		$data = $this->resource->fetch($page);
 		$totalRows = $this->resource->getTotalRows();
 		$extras = array('totalrows'=> (int)$totalRows);
+
 		return $this->responseMessage($data,'successful',200, $extras);
 	}
 
@@ -117,7 +119,7 @@ abstract class ResourceApiBase extends RavelBaseController
 	protected function responseMessage($data, $message = 'request successful', $status = 200, $extras = array())
 	{
 
-		if(is_bool($data) === true)
+		if(is_bool($data) === true && ($data === false))
 		{
 			$errors = $this->resource->getErrors();
 			$status = $this->resource->getResponseStatus();

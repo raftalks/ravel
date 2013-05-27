@@ -7,7 +7,7 @@ class Page extends Content
 
 	protected $contentType = 'page';
 	
-	
+	protected $useContentCategories = false;
 
 	public function ContentModel()
 	{

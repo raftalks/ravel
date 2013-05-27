@@ -109,9 +109,15 @@ class Acl implements AccessControlInterface
 	public function getUserRoles()
 	{
 
-		if(is_null($this->getUser()))
+		if($this->is_guest())
 		{
-			return null;
+			//fetch visitor roles
+			if(is_null($this->roles))
+			{
+				$this->roles = $this->getVisitorRoles();
+			}
+
+			return $this->roles;
 		}
 
 		 if(is_null($this->roles))
@@ -137,6 +143,25 @@ class Acl implements AccessControlInterface
 
 	}
 
+
+	protected function getVisitorRoles()
+	{
+		$visitorGroupName = Config::get('ravel::roles.visitors_group','user');
+		$usrGroup = new Usergroup;
+		$usergroup = $usrGroup->getUserGroupByName($visitorGroupName);
+		$roles = $usergroup->roles()->with(array('module'))->get();
+		$roles_data = array();
+		foreach($roles as $role)
+		{
+			$module = $role->module;
+			$module_name = strtolower($module->module);
+			$module_name = str_replace(' ', '_', $module_name);
+			$roles_data[$module_name] = unserialize($role->permissions);
+		}
+
+		return $roles_data;
+	}
+
 	protected function getModule()
 	{
 		return $this->module;
@@ -150,7 +175,7 @@ class Acl implements AccessControlInterface
 
 	protected function can_do($moduleName, $action)
 	{
-		if(!$this->isUserActivated())
+		if(!$this->isUserActivated() && !$this->is_guest())
 		{
 			return false;
 		}

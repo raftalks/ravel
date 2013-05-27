@@ -29,5 +29,11 @@ class Usergroup extends EloquentBaseModel
 		return $data;
 	}
 
+	function getUserGroupByName($name)
+	{
+		$usergroup = $this->where('group','=',$name)->first();
+		return $usergroup;
+	}
+
 
 }

@@ -97,11 +97,12 @@ abstract class ServiceModel
 	protected function verify($action)
 	{
 		$method = strtolower('can_' . $action);
+
 		if($this->acl()->$method())
 		{
 			return true;
 		}
-		$this->addErrorMessage('Action restricted',403);
+		$this->addErrorMessage(ucfirst($action) .' action restricted',403);
 		return false;
 	}
 
@@ -153,7 +154,7 @@ abstract class ServiceModel
 		$model = $this->model()->newInstance();
 		if(is_callable($callback))
 		{
-			$model = $this->doRunClosure($callback, $model);
+			$this->doRunClosure($callback, $model);
 		}
 
 		$total = $model->count();
@@ -165,7 +166,6 @@ abstract class ServiceModel
 	{
 		if($this->authenticate_full)
 		{
-
 			if($this->verify('read') == false)
 			{
 				return false;
@@ -178,7 +178,7 @@ abstract class ServiceModel
 
 		if(is_callable($callback))
 		{
-			$model = $this->doRunClosure($callback, $model);
+			$this->doRunClosure($callback, $model);
 		}
 
 		if(is_array($this->resource_with))
@@ -211,11 +211,14 @@ abstract class ServiceModel
 
 	}
 
-	protected function doRunClosure(closure $callback, $model)
+	protected function doRunClosure(closure $callback, &$model)
 	{
 		$host = $this;
-		$model = $callback($model, $host);
-		return $model;
+		if(is_closure($callback))
+		{
+			$callback($model, $host);
+		}
+		
 	}
 
 	protected function beforeFetch($model)
@@ -239,12 +242,15 @@ abstract class ServiceModel
 	public function show($id, $callback = null)
 	{
 
-		$model = $this->model();
+		$model = $this->model()->newInstance();
 
-		if(is_callable($callback))
+		//$model = $this->model();
+
+		if(!is_null($callback) && is_closure($callback))
 		{
-			$model = $this->doRunClosure($callback, $model);
+			$this->doRunClosure($callback, $model);
 		}
+		
 
 		$result = $model->find($id);
 		if(is_null($result))
@@ -290,7 +296,7 @@ abstract class ServiceModel
 
 				if(is_callable($callback))
 				{
-					$model = $this->doRunClosure($callback, $model);
+					$this->doRunClosure($callback, $model);
 				}
 
 				if($model->isValid($data))
@@ -339,7 +345,7 @@ abstract class ServiceModel
 
 			if(is_callable($callback))
 			{
-				$model = $this->doRunClosure($callback, $model);
+				$this->doRunClosure($callback, $model);
 			}
 
 			if($model->isValid())

@@ -124,3 +124,10 @@ if(! function_exists('makeApiKey'))
 		return $key;
 	}
 }
+
+if(! function_exists('is_closure'))
+{
+	function is_closure($t) {
+   		 return is_object($t) && ($t instanceof Closure);
+	}
+}

@@ -20,7 +20,9 @@ return array(
 								'custom_field2' => array('label'=>'custom field2','type'=>'select','options'=>array(1=>'test',2=>'two',3=>'three',4=>'foour'))
 								),
 
-			'page'			=> array(),
+			'page'			=> array(
+								'somefield' => array('label'=>'custom field','type'=>'input_text'),
+							),
 
 			'attachement'	=> array(),
 

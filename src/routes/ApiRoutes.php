@@ -23,7 +23,7 @@ Route::filter('ravelauth.api', function()
 	}
 });
 
-Route::group(array('prefix'=>_API_BASE_,'before'=>'ravelauth.api|ravelauth'),function()
+Route::group(array('prefix'=>_API_BASE_,'before'=>'ravelauth.api'),function()
 {
 	Route::resource('pages','PagesApiController', array('only'=>array('index','show','store','update','destroy')));
 
