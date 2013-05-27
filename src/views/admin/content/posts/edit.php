@@ -12,7 +12,7 @@ echo Form::make('div',function($form)
 
 			$div->textarea('excerpt',trans('ravel::content.excerpt'))->ng_model('item.excerpt','ng-model')->class('excerpt-textarea');
 
-			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea');
+			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea')->ckeditor('','ck-editor');;
 
 			$customfields = Config::get('ravel::content.custom_fields.post');
 			$div->ng_custom_fields($customfields);
@@ -31,6 +31,11 @@ echo Form::make('div',function($form)
 					'draft' 	=> 'Draft',
 					'Submitted'	=> 'Submitted'
 				);
+
+				if(is_moderator())
+				{
+					$options['published'] = 'published';
+				}
 
 				//status of the post
 				$div->select('status',trans('ravel::content.status'))->options($options)->ng_model('item.status','ng-model');

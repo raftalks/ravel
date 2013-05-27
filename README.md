@@ -4,7 +4,7 @@
 
 ## CMS Package for Laravel 4
 
-![Screenshot](http://screencloud.net//img/screenshots/875bcabf90c92c50f2caac31d1fdd46e.png)
+![Screenshot](http://screencloud.net/img/screenshots/459073add52925cad259ee3cdf4a969f.png)
 
 ### How to Install
 

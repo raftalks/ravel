@@ -231,6 +231,7 @@
         $scope.insertItem = true;
         $scope.item = new DataSource;
         $scope.gotopage('posts/create');
+
 		}
 
 		//read
@@ -245,6 +246,7 @@
         $scope.insertItem = false;
         $scope.item = new DataSource(item);
         $scope.gotopage('posts/edit');
+
     }
 
 		//update item

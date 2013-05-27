@@ -24,6 +24,17 @@ if(! function_exists('currentUserName'))
 	}
 }
 
+
+if(! function_exists('is_moderator'))
+{
+	function is_moderator()
+	{
+		$Acl = app('AccessControl');
+		return $Acl->is_moderator();
+	}
+}
+
+
 if(! function_exists('apiUrl'))
 {
 	function apiUrl($str)

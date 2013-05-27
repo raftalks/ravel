@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	//APP MODULE
-	var App = angular.module('app', ['ngResource','ui'], function ($routeProvider, $locationProvider, $httpProvider) {
+	var App = angular.module('app', ['ngResource','ui','ck'], function ($routeProvider, $locationProvider, $httpProvider) {
 
     var interceptor = ['$rootScope', '$q', function (scope, $q) {
 
@@ -115,9 +115,9 @@ function show_error_message(message)
 }
 
 
-  $(".ng_multi_select").select2(); 
+$(".ng_multi_select").select2(); 
 
-   
+
 
 
 </script>
