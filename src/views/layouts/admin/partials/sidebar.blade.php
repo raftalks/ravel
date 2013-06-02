@@ -15,7 +15,9 @@
 		
 	</div> 
 	
-	<?php echo $ravel_admin_menulinks;?>
+	<?php
+		echo Menu::build();
+	?>
 	
 	</div>
 </div> <!-- End #sidebar -->

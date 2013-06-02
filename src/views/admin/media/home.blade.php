@@ -1,8 +1,47 @@
 @section('appcontainer')
-<div ng-controller='MasterCtrl'>
+<div ng-controller='MasterCtrl' class='content-box-content'>
 
-<div ng-include='show_template'></div>
+<div class='media-collections align-left span3'>
+    
 
+    <div class='addCollection'>
+        <h4>Add New Collection</h4>
+        <input name='collection' ng-model='new_collection' type='text' class='text-input' />
+        <span >
+            <button ng-click='toggleLock()' class='shortcut-button normal'><i ng-class='lockIcon'></i></button>
+            <button ng-click='addCollection()' class='button'><i class='icon-plus'></i></button>
+        </span>
+        <div>
+            
+        </div>
+    </div>
+
+    <div class='media-collections'>
+        <h3>My Collections</h3>
+        <ul class='media-collection-list'>
+            <li ng-repeat='folder in collections | filter:{type:"private"}' ng-click='selectCollection(folder)'>
+                <a src='#' class='block' ng-bind='folder.name' ></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class='media-collections' ng-show='(collections | filter:{type:"shared"}).length'>
+        <h5>Shared by Others</h5>
+        <ul class='media-collection-list'>
+            <li ng-repeat='folder in collections | filter:{type:"shared"}'>
+                <div ng-bind='folder.name'></div>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+<div class='collection-list align-left span9'>
+    <div ng-include='show_template'></div>
+</div>
+
+<div class='clear'></div>
+   
     <script type="text/ng-template" id='media/view'>
        @include('ravel::admin.media.view')
     </script>
@@ -38,13 +77,96 @@
 	});
 
 
+    App.factory('MediaCollection', function($resource)
+    {
+        return $resource('<?php echo action("MediaCollectionApiController@index");?>/:id',
+            {id:'@id'},
+            {
+                    query: {method:'GET'},
+                    get:{method:'GET'},
+                    create: {method:'POST'},
+                    save: {method:'PUT'},
+                    remove: {method: 'DELETE'}
+            });
+    });
+
+
     
 
 
 
-	MasterCtrl.$inject=['$scope','DataSource'];
-	function MasterCtrl($scope, DataSource)
+	MasterCtrl.$inject=['$scope','DataSource','MediaCollection'];
+	function MasterCtrl($scope, DataSource, MediaCollection)
 	{
+       
+
+        //new collection
+        $scope.new_collection= '';
+
+        $scope.collections = [];
+
+        $scope.activeCollection = {};
+
+        $scope.collectionShared = 0;
+        $scope.lockIcon = 'icon-lock';
+
+        $scope.addCollection = function()
+        {
+            var folder = angular.copy($scope.new_collection);
+            var status = $scope.collectionShared;
+            var collection = new MediaCollection({name: folder, shared:status, items:[]});
+
+            collection.$create(function(data, response)
+            {
+                 $scope.$broadcast('insert_collection', true);
+                 $scope.new_collection = '';
+                 $scope.collections.push(collection);
+
+            },function()
+            {
+                $scope.$broadcast('insert_collection', false);
+            });
+        
+        }
+
+        $scope.selectCollection = function(collection)
+        {
+            $scope.activeCollection = collection;
+        }
+
+        $scope.fetchCollections = function()
+        {
+            MediaCollection.get(function(request)
+            {
+                $scope.collections = request.data;
+                
+            });
+        }
+
+        $scope.fetchCollections();
+
+         //action taken after submition of data
+        $scope.$on('insert_collection',function(evt, status)
+        {
+            if(status)
+            {
+                $scope.fetchCollections(); //reloading data again
+            }
+        });
+
+        $scope.toggleLock = function()
+        {
+
+            if($scope.collectionShared)
+            {
+                $scope.collectionShared = 0;
+                $scope.lockIcon = 'icon-lock';
+            }else{
+                
+                $scope.collectionShared= 1;
+                $scope.lockIcon = 'icon-unlock';
+            }
+        }
 
 	
 	//attributes
@@ -76,17 +198,17 @@
 	//fetch recordset data
 		$scope.fetchdata = function()
 		{
-        var pageNumber = $scope.pageNumber;
+             var pageNumber = $scope.pageNumber;
   			DataSource.get({page: pageNumber},function(request)
-        {
-            $scope.recordset = request.data;
-            $scope.pages = Math.ceil(request.totalrows / $scope.itemsPerPage);
-        });
+            {
+                $scope.recordset = request.data;
+                $scope.pages = Math.ceil(request.totalrows / $scope.itemsPerPage);
+            });
 		}
 
     
 
-		$scope.fetchdata();
+		//$scope.fetchdata();
 
 
     $scope.gotopage = function(path)

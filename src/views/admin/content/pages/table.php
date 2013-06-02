@@ -7,6 +7,8 @@
 
                 $html->table(function($table)
                 {
+                    $table->setClass('table table-striped table-hover');
+                    
                     $table->thead(function($thead)
                     {
                         $thead->tr(function($tr)

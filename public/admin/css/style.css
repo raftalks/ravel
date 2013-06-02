@@ -480,8 +480,7 @@ ul.content-box-tabs li a.current {
 .shortcut-button {
                 border: 1px solid #ccc;
                 background: #f7f7f7 url('../images/shortcut-button-bg.gif') top left no-repeat;
-                display: block;
-                width: 120px;
+                               
                 margin: 0 0 20px 0;
                 }
 
@@ -500,7 +499,9 @@ ul.content-box-tabs li a.current {
                 }
 
 .shortcut-button:hover {
-                background: #fff;
+                background: #999;
+                color:#fff;
+                cursor: pointer;
                                 
                 }
                                 
@@ -822,4 +823,67 @@ body#login {
 
 .fill-up{
     width:100%;
+}
+
+
+.fileinput-button 
+{
+    position: relative;
+    overflow: hidden;
+}
+
+.fileinput-button input 
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4);
+    font-size: 23px;
+    direction: ltr;
+    cursor: pointer;
+}
+
+.media-collections {
+    margin-top:25px;
+}
+
+.media-collections h3
+{
+    border-bottom: 1px solid #ccc;
+}
+
+ul.media-collection-list li {
+    padding:8px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+
+}
+
+ul.media-collection-list li:hover
+{
+    background-color:#ccc;
+
+}
+
+.dropzone-toolbar {
+    background-color: #999;
+    padding: 5px;
+}
+
+.dropzone .notice-successful
+{
+    background-color: #CEF6E3;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.block{
+    display: block;
 }

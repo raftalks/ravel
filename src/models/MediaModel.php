@@ -7,6 +7,8 @@ class MediaModel extends EloquentBaseModel
 	protected	 	$fillable 		= array(
 										'media_type',
 										'path',
+										'file_name',
+										'user_id',
 										'caption',
 										'publish',
 										'approved',
@@ -19,11 +21,21 @@ class MediaModel extends EloquentBaseModel
 
 			'media_type' 		=> 'required',
 			'path'				=> 'required',
-			'title'				=> 'required'
+			'file_name'				=> 'required'
 
 		);
 
 	protected $softDelete = false;
+
+	// public function collections()
+	// {
+	// 	return $this->belongsToMany('Mcollection');
+	// }
+
+	// public function contents()
+	// {
+	// 	return $this->belongsToMany('ContentModel');
+	// }
 
 	
 

@@ -1,8 +1,11 @@
 <?php namespace Raftalks\Ravel\Media;
 
+use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Raftalks\Ravel\ServiceModel;
 use Config;
 use MediaModel;
+use Image;
 
 class Media extends ServiceModel
 {
@@ -16,13 +19,17 @@ class Media extends ServiceModel
 
 	protected $thumbnailSize = array();
 
+	protected $uploadFieldName = 'file';
+
 	protected function setup()
 	{
+
 		$this->model = $this->mediaModel();
 		$this->mediaTypes = $this->mediaTypes();
 		$this->maxFileSize = $this->mediaStorage();
 		$this->mediaStoragePath = $this->mediaStorage();
 		$this->thumbnailSize = $this->thumbnailSize();
+
 	}
 
 
@@ -35,6 +42,9 @@ class Media extends ServiceModel
 	{
 		return Config::get('ravel::media.max_file_size');
 	}
+
+
+
 
 	private function mediaStorage()
 	{
@@ -54,13 +64,14 @@ class Media extends ServiceModel
 					
 				}
 			}
-
-			$this->uploadPath = $findPath;
+			
+			$this->mediaStoragePath = $findPath;
 		}
 
-		return $this->mediaStoragePath;
-		 
+		return $this->mediaStoragePath; 
 	}
+
+
 
 	private function thumbnailSize()
 	{
@@ -70,28 +81,159 @@ class Media extends ServiceModel
 			);
 	}
 
+
+
+
 	private function mediaModel()
 	{
 		return new MediaModel();
 	}
 
 
-	protected function beforeInsert($model, $data)
+	public function insert($data, $callback=null)
 	{
-		$this->mediaUpload($model, $data);
+		$collection_id = (int)$data['collection_id'];
+		
+		if(isset($data[$this->uploadFieldName]))
+		{
+			$this->prepareMediaData($data);
+
+			//check if media already exists
+			if($this->mediaNotExists($data))
+			{
+				return parent::insert($data, $callback);
+			} else
+			{
+				$this->mediaUpload($data);
+			}
+			
+		}
+		else
+		{
+			throw new Exception("No File Submitted", 406);
+		}
+		
+	}
+
+	protected function mediaNotExists($data)
+	{
+		$model = $this->model()->newInstance();
+		$count = $model->where('media_type','=',$data['media_type'])
+				->where('path','=',$data['path'])
+				->where('file_name','=',$data['file_name'])
+				->count();
+		if($count > 0)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+
+	protected function afterInsert($model, $data)
+	{
+		$this->mediaUpload($data);
 	}
 
 	protected function beforeSave($model, $data)
 	{
-		$this->mediaUpload($model, $data);
+		//$this->mediaUpload($model, $data);
 	}
 
 
-
-	protected function mediaUpload($model, $data)
+	protected function prepareMediaData(&$data)
 	{
+		$file = $data[$this->uploadFieldName];
+		if($file instanceof UploadedFile)
+		{
+			$subDirName = $data['collection_id'];
+			$filename = $file->getClientOriginalName();
+			$mediaType = $this->getMediaType($file);
+			$uploadPath = $this->getUploadPath();
 
+			$path = $uploadPath . '/'.$subDirName.'/';
+
+			$data['file_name'] = str_replace(' ','_', $filename);
+			$data['media_type'] = $mediaType;
+			$data['path'] = $path;
+			$data['sub_dir'] = $subDirName;
+			$data['user_id'] = $this->getAuthorId();
+
+		} else
+		{
+			throw new Exception("Invalid File Object", 406);
+			
+		}
 	}
+
+
+	/**
+	 * Upload media files to the storage page
+	 * @param  object $model 
+	 * @param  array $data  form data
+	 * @return boolean        
+	 */
+	protected function mediaUpload($data)
+	{
+		if(isset($data[$this->uploadFieldName]))
+		{
+			$file = $data[$this->uploadFieldName];
+			$thumbFile = $data[$this->uploadFieldName];
+
+			$pathToPublic = app()->make('path.public');
+
+			$uploadPath = $this->getUploadPath();
+			$sub_dir = $data['sub_dir'];
+			$uploadRealPath = $data['path'];
+			$filename = $data['file_name'];
+
+			$thumb_path = $uploadRealPath . '/thumbs/';
+			$thumb_filename = 'thumb_'.$filename;
+
+			// if( ! app('files')->isDirectory($uploadPath))
+			// {
+			// 	//create upload path
+			// 	app('files')->makeDirectory($uploadPath);
+
+			// }
+
+			// if(! app('files')->isDirectory($uploadRealPath))
+			// {
+			// 	//create subdirectory
+			// 	app('files')->makeDirectory($uploadRealPath);
+			// }
+
+			$origImagePath = $uploadRealPath . $filename;
+			$thumbImgePath = $thumb_path.$thumb_filename;
+
+			$targetFile = $file->move($uploadRealPath, $filename);
+			
+			if($data['media_type'] == 'image')
+			{
+				//create thumb dir if not exist
+				if( ! app('files')->isDirectory($thumb_path))
+				{
+					app('files')->makeDirectory($thumb_path);
+				}
+
+				//copy source file to thumb dir
+				app('files')->copy($origImagePath, $thumbImgePath);
+					
+				$ts = $this->thumbnailSize();
+
+				$img = Image::make( $thumbImgePath)
+						->resize($ts['w'],$ts['h'],true)
+						->save();
+			}
+			
+			
+		}
+	}
+
+
+
+
 
 	protected function mediaRemove($path)
 	{
@@ -99,9 +241,13 @@ class Media extends ServiceModel
 	}
 
 
-	public function uploadPath()
+	public function getUploadPath()
 	{
-		return action("MediaUploadApiController@index");	
+		$storagePath = $this->mediaStorage();
+
+		$username = $this->getAuthorName();
+
+		return $storagePath . '/' . $username;
 	}
 
 
@@ -113,6 +259,33 @@ class Media extends ServiceModel
 	public function thumbHeight()
 	{
 		return $this->thumbnailSize['h'];
+	}
+
+
+
+	public function getMediaType($file)
+	{
+		$extension = $file->getClientOriginalExtension();
+		
+		$mediaTypes = Config::get('ravel::media.media_types');
+
+		$mediaType = null;
+		foreach($mediaTypes as $type => $validExts)
+		{
+			if(in_array($extension, $validExts))
+			{
+				$mediaType = $type;
+				break;
+			}
+		}
+
+		if(!is_null($mediaType))
+		{
+			return $mediaType;
+		} else
+		{
+			return 'file';
+		}
 	}
 
 

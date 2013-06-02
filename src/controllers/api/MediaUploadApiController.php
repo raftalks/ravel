@@ -6,8 +6,7 @@ class MediaUploadApiController extends ResourceApiBase
 
 	protected function setupResources()
 	{
-		$resourceClass = new Media;
-		$this->resource = new $resourceClass;
+		$this->resource = app('Media');
 	}
 
 
@@ -16,10 +15,8 @@ class MediaUploadApiController extends ResourceApiBase
 	 */
 	public function store()
 	{
-		$data = Input::get();
-
-		return Response::json('success', 200);
-
+		$data = Input::all();
+		
 		$respond = $this->resource->insert($data);
 
 		//if respond returns boolean false
@@ -30,7 +27,15 @@ class MediaUploadApiController extends ResourceApiBase
 			return $this->errorResponse($errors, $status);
 		}
 
-		return $this->responseMessage($respond);
+		if(is_bool($respond) === true && ($respond === false))
+		{
+			$errors = $this->resource->getErrors();
+			$status = $this->resource->getResponseStatus();
+			return $this->errorResponse($errors, 400);
+		} else
+		{
+			return Response::json('success', 200);
+		}
 	}
 	
 }

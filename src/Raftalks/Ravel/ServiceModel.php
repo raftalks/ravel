@@ -36,8 +36,8 @@ abstract class ServiceModel
 
 	public function __construct()
 	{
-		$this->setup();
 		$this->acl = app('AccessControl');
+		$this->setup();
 	}
 
 
@@ -140,6 +140,12 @@ abstract class ServiceModel
 	{
 		$author = $this->getAuthor();
 		return $author->id;
+	}
+
+	public function getAuthorName()
+	{
+		$author = $this->getAuthor();
+		return $author->username;
 	}
 
 

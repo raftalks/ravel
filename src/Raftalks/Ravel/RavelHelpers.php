@@ -24,6 +24,20 @@ if(! function_exists('currentUserName'))
 	}
 }
 
+if(! function_exists('currentUserId'))
+{
+	function currentUserId()
+	{
+		$user = Auth::getUser();
+		if(!is_null($user))
+		{
+			return $user->id;
+		}
+
+		return null;
+	}
+}
+
 
 if(! function_exists('is_moderator'))
 {

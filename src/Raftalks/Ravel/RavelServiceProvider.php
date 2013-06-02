@@ -21,7 +21,7 @@ class RavelServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-
+		$this->app->register('Intervention\Image\ImageServiceProvider');
 		$this->package('raftalks/ravel');
 
 		$this->registerCommands();

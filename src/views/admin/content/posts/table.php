@@ -1,5 +1,6 @@
 <?php echo HTML::make('div',function($html)
     {
+
         $html->content_panel('Posts',function($div)
         {
             $div->div(function($html)
@@ -7,6 +8,8 @@
 
                 $html->table(function($table)
                 {
+                  $table->setClass('table table-striped table-hover');
+
                     $table->thead(function($thead)
                     {
                         $thead->tr(function($tr)

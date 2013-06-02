@@ -26,15 +26,18 @@
 		<!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
 		<link rel="stylesheet" href="<?php echo admin_asset('admin/css/invalid.css');?>" type="text/css" media="screen" />	
 		
+		<!-- Dropzone css -->
+		<link rel="stylesheet" href="<?php echo admin_asset('admin/dropzone/css/dropzone.css');?>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo admin_asset('admin/dropzone/css/basic.css');?>" type="text/css" media="screen" />
+
 		<!-- Colour Schemes
 	  
 		Default colour scheme is green. Uncomment prefered stylesheet to use it.
 		
 		<link rel="stylesheet" href="<?php echo admin_asset('admin/css/blue.css');?>" type="text/css" media="screen" />
-		
-		<link rel="stylesheet" href="<?php echo admin_asset('admin/css/red.css');?>" type="text/css" media="screen" />  
-	 
 		-->
+		<link rel="stylesheet" href="<?php echo admin_asset('admin/css/red.css');?>" type="text/css" media="screen" />  
+
 		
 		<!-- Internet Explorer Fixes Stylesheet -->
 		
@@ -74,7 +77,13 @@
 		<!--jbar jquery plugin -->
 		<script type="text/javascript" src="<?php echo admin_asset('admin/jbar/jquery.bar.js');?>"></script>
 		
+		<!--Dropzone -->
+		<script type="text/javascript" src="<?php echo admin_asset('admin/dropzone/dropzone.min.js');?>"></script>
 		
+	
+		
+
+
 		<!-- Internet Explorer .png-fix -->
 		
 		<!--[if IE 6]>

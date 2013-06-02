@@ -34,4 +34,6 @@ Route::group(array('prefix'=>_API_BASE_,'before'=>'ravelauth.api'),function()
 	Route::resource('upload','MediaUploadApiController', array('only'=>array('index','show','store','update','destroy')));
 
 	Route::resource('postcategories','PostsCategoriesApiController',array('only'=>array('index','show','store','update','destroy')));
+
+	Route::resource('mcollection','MediaCollectionApiController', array('only'=>array('index','show','store','update','destroy')));
 });

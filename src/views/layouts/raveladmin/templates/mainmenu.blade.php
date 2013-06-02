@@ -45,13 +45,17 @@ Html::macro('menulinks',function($menulinks, $parent = true)
 		if($parent)
 		{
 			$ul->setId('main-nav');
+			$ul->setClass('menu');
+		} else 
+		{
+			$ul->setClass('sub-menu');
+			$ul->setStyle('bottom: 35px;');
 		}
 		
 	});
 });
 
-echo Html::make('nav',function($div) use($menu_links)
+echo Html::make('div',function($div) use($menu_links)
 {
-	$div->setClass('menu-main-menu-container');
 	$div->menulinks($menu_links);
 });

@@ -21,7 +21,6 @@ class EloquentBaseModel extends Eloquent
 	protected $validation_object = false;
 
 
-
 	public function setTableName($name)
 	{
 		$this->table = $name;
@@ -69,5 +68,7 @@ class EloquentBaseModel extends Eloquent
 	{
 		return $this->validation_error_messages;
 	}
+
+	
 
 }
