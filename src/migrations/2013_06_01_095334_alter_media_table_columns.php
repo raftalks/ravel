@@ -13,9 +13,6 @@ class AlterMediaTableColumns extends Migration {
 	public function up()
 	{
 
-		DB::update(DB::raw('ALTER TABLE  `medias` CHANGE  `caption`  `caption` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL'));
-		DB::update(DB::raw('ALTER TABLE  `medias` CHANGE  `keywords`  `keywords` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL'));
-		
 		Schema::table('medias', function(Blueprint $table)
 		{
 			$table->string('file_name')->after('path');
