@@ -8,15 +8,15 @@ Xhtml::macro('menulinks',function($menulinks, $parent = true)
 
 			$ul->li(function($li) use($menu, $parent)
 			{
-				$ParentlinkClass = 'nav-top-item no-submenu';
+				$ParentlinkClass = 'menu-parent';
 				if($menu['active'])
 				{
-					$ParentlinkClass = 'nav-top-item no-submenu current';
+					$ParentlinkClass = 'menu-parent current';
 				}
 
 				if(isset($menu['children']))
 				{
-
+					
 					$li->a($menu['label'])->href($menu['link'])->class($ParentlinkClass);
 					$li->menulinks($menu['children'], false);
 				}
@@ -52,6 +52,6 @@ Xhtml::macro('menulinks',function($menulinks, $parent = true)
 
 echo Xhtml::make('nav',function($div) use($menu_links)
 {
-	$div->setClass('menu-main-menu-container');
+	$div->setClass('test');
 	$div->menulinks($menu_links);
 });

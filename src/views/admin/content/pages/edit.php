@@ -1,6 +1,6 @@
 <?php
 
-echo Form::make('div',function($form)
+echo Xform::make('div',function($form)
 {
 
 	$form->box_panel(trans('ravel::content.update_page'),function($form)

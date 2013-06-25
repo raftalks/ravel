@@ -1,6 +1,6 @@
 <?php
 
-echo Form::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
+echo Xform::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
 {
 	$form->share('ravel_item_layouts',$ravel_item_layouts);
 	$form->share('ravel_list_layouts',$ravel_list_layouts);

@@ -1,6 +1,6 @@
 <?php
 
-echo Form::make(function($form) use($usergroups, $errors)
+echo Xform::make(function($form) use($usergroups, $errors)
 {
 	// $usrgroups = array();
 	// foreach($usergroups as $group)

@@ -1,20 +1,20 @@
 <?php
 
-Form::decorate('text',function($textInput)
+Xform::decorate('text',function($textInput)
 {
 	$textInput->class('text-input');
 });
 
-Form::decorate('password',function($textInput)
+Xform::decorate('password',function($textInput)
 {
 	$textInput->class('text-input');
 });
 
 
 
-Html::macro('box_panel',function($title, $callback)
+Xhtml::macro('box_panel',function($title, $callback)
 {
-	return Form::template('div',function($div) use($title, $callback)
+	return Xform::template('div',function($div) use($title, $callback)
 	{
 
 		$div->div(function($div) use($title)
@@ -34,9 +34,9 @@ Html::macro('box_panel',function($title, $callback)
 });
 
 
-Html::macro('content_panel',function($title, $callback, $toolbarCallback = null)
+Xhtml::macro('content_panel',function($title, $callback, $toolbarCallback = null)
 {
-	return Form::template('div',function($div) use($title, $callback, $toolbarCallback)
+	return Xform::template('div',function($div) use($title, $callback, $toolbarCallback)
 	{
 
 		$div->div(function($div) use($title)
@@ -75,9 +75,9 @@ Html::macro('content_panel',function($title, $callback, $toolbarCallback = null)
 
 
 
-Form::macro('box_panel',function($title, $callback)
+Xform::macro('box_panel',function($title, $callback)
 {
-	$macro = Html::getMacro('box_panel');
+	$macro = Xhtml::getMacro('box_panel');
 	return $macro($title, $callback);
 });
 
@@ -116,9 +116,9 @@ function have_error($form, $name)
 
 
 
-Form::include_all(function()
+Xform::include_all(function()
 {
-	return Form::template('div',function($form)
+	return Xform::template('div',function($form)
 	{
 		$form->hidden('csrf_token')->value(Session::getToken());
 		$form->setClass('token');
@@ -127,9 +127,9 @@ Form::include_all(function()
 
 
 
-Form::macro('show_input_error',function($name, $message=null)
+Xform::macro('show_input_error',function($name, $message=null)
 {
-	return Form::template('span',function($form) use($name, $message)
+	return Xform::template('span',function($form) use($name, $message)
 	{
 		$error_message = get_form_error_message($form, $name);			
 
@@ -152,23 +152,23 @@ Form::macro('show_input_error',function($name, $message=null)
 });
 
 
-Form::macro('break',function()
+Xform::macro('break',function()
 {
-	return Form::template('br',function($form)
+	return Xform::template('br',function($form)
 	{
 
 	});
 });
 
 
-Form::macro('input_textarea', function($name, $label, $value=null, $attr = array())
+Xform::macro('input_textarea', function($name, $label, $value=null, $attr = array())
 {
 	if(is_null($value) || $value =='')
 	{
 		$value = Input::old($name);
 	}
 
-	return Form::template('div',function($form) use ($name, $label, $attr, $value)
+	return Xform::template('div',function($form) use ($name, $label, $attr, $value)
 	{
 		if(have_error($form, $name))
 		{
@@ -186,14 +186,14 @@ Form::macro('input_textarea', function($name, $label, $value=null, $attr = array
 
 
 
-Form::macro('input_number', function($name, $label, $value=null, $attr = array())
+Xform::macro('input_number', function($name, $label, $value=null, $attr = array())
 {
 	if(is_null($value) || $value =='')
 	{
 		$value = Input::old($name);
 	}
 
-	return Form::template('div',function($form) use ($name, $label, $attr, $value)
+	return Xform::template('div',function($form) use ($name, $label, $attr, $value)
 	{
 		if(have_error($form, $name))
 		{
@@ -214,14 +214,14 @@ Form::macro('input_number', function($name, $label, $value=null, $attr = array()
 
 
 
-Form::macro('input_text', function($name, $label, $value=null, $attr = array())
+Xform::macro('input_text', function($name, $label, $value=null, $attr = array())
 {
 	if(is_null($value) || $value =='')
 	{
 		$value = Input::old($name);
 	}
 
-	return Form::template('div',function($form) use ($name, $label, $attr, $value)
+	return Xform::template('div',function($form) use ($name, $label, $attr, $value)
 	{
 		if(have_error($form, $name))
 		{
@@ -244,14 +244,14 @@ Form::macro('input_text', function($name, $label, $value=null, $attr = array())
 
 
 
-Form::macro('input_text_fill', function($name, $label, $value=null, $attr = array())
+Xform::macro('input_text_fill', function($name, $label, $value=null, $attr = array())
 {
 	if(is_null($value) || $value =='')
 	{
 		$value = Input::old($name);
 	}
 
-	return Form::template('div',function($form) use ($name, $label, $attr, $value)
+	return Xform::template('div',function($form) use ($name, $label, $attr, $value)
 	{
 		if(have_error($form, $name))
 		{
@@ -270,14 +270,14 @@ Form::macro('input_text_fill', function($name, $label, $value=null, $attr = arra
 
 
 
-Form::macro('input_text_small', function($name, $label, $value=null, $attr = array())
+Xform::macro('input_text_small', function($name, $label, $value=null, $attr = array())
 {
 	if(is_null($value) || $value =='')
 	{
 		$value = Input::old($name);
 	}
 
-	return Form::template('div',function($form) use ($name, $label, $attr, $value)
+	return Xform::template('div',function($form) use ($name, $label, $attr, $value)
 	{
 		if(have_error($form, $name))
 		{
@@ -295,14 +295,14 @@ Form::macro('input_text_small', function($name, $label, $value=null, $attr = arr
 
 
 
-Form::macro('input_text_large', function($name, $label, $value=null, $attr = array())
+Xform::macro('input_text_large', function($name, $label, $value=null, $attr = array())
 {
 	if(is_null($value) || $value =='')
 	{
 		$value = Input::old($name);
 	}
 
-	return Form::template('div',function($form) use ($name, $label, $attr, $value)
+	return Xform::template('div',function($form) use ($name, $label, $attr, $value)
 	{
 		if(have_error($form, $name))
 		{
@@ -321,10 +321,10 @@ Form::macro('input_text_large', function($name, $label, $value=null, $attr = arr
 
 
 //input password field types
-Form::macro('input_password', function($name, $label, $attr = array())
+Xform::macro('input_password', function($name, $label, $attr = array())
 {
 	
-	return Form::template('div',function($form) use ($name, $label, $attr)
+	return Xform::template('div',function($form) use ($name, $label, $attr)
 	{
 		if(have_error($form, $name))
 		{
@@ -343,10 +343,10 @@ Form::macro('input_password', function($name, $label, $attr = array())
 
 
 
-Form::macro('input_password_fill', function($name, $label,  $attr = array())
+Xform::macro('input_password_fill', function($name, $label,  $attr = array())
 {
 
-	return Form::template('div',function($form) use ($name, $label, $attr)
+	return Xform::template('div',function($form) use ($name, $label, $attr)
 	{
 		if(have_error($form, $name))
 		{
@@ -367,14 +367,14 @@ Form::macro('input_password_fill', function($name, $label,  $attr = array())
 
 
 
-Form::macro('input_checkbox', function($name, $label, $checked=false, $attr = array())
+Xform::macro('input_checkbox', function($name, $label, $checked=false, $attr = array())
 {
 	if($checked)
 	{
 		$attr['checked'] = true;
 	}
 	
-	return Form::template('div',function($form) use ($name, $label, $attr)
+	return Xform::template('div',function($form) use ($name, $label, $attr)
 	{
 		if(have_error($form, $name))
 		{
@@ -402,14 +402,14 @@ Form::macro('input_checkbox', function($name, $label, $checked=false, $attr = ar
 
 
 
-Form::macro('input_radio', function($name, $label, $checked=false, $attr = array())
+Xform::macro('input_radio', function($name, $label, $checked=false, $attr = array())
 {
 	if($checked)
 	{
 		$attr['checked'] = true;
 	}
 	
-	return Form::template('div',function($form) use ($name, $label, $attr)
+	return Xform::template('div',function($form) use ($name, $label, $attr)
 	{
 		if(have_error($form, $name))
 		{
@@ -437,10 +437,10 @@ Form::macro('input_radio', function($name, $label, $checked=false, $attr = array
 
 
 
-Form::macro('submit_actions',function($submitName='Submit', $CancelBt=true, $attr=array())
+Xform::macro('submit_actions',function($submitName='Submit', $CancelBt=true, $attr=array())
 {
 
-	return Form::template('div',function($form) use ($submitName, $CancelBt, $attr)
+	return Xform::template('div',function($form) use ($submitName, $CancelBt, $attr)
 	{
 		$form->submit($submitName)->class('button blue')->setAttributes($attr);
 		if($CancelBt)
@@ -456,10 +456,10 @@ Form::macro('submit_actions',function($submitName='Submit', $CancelBt=true, $att
 });
 
 
-Form::macro('ng_submit_actions',function($submitName='Submit', $CancelBt=true, $attr=array())
+Xform::macro('ng_submit_actions',function($submitName='Submit', $CancelBt=true, $attr=array())
 {
 
-	return Form::template('div',function($form) use ($submitName, $CancelBt, $attr)
+	return Xform::template('div',function($form) use ($submitName, $CancelBt, $attr)
 	{
 		$form->submit($submitName)->class('btn btn-primary')->setAttributes($attr);
 		if($CancelBt)
@@ -479,14 +479,14 @@ Form::macro('ng_submit_actions',function($submitName='Submit', $CancelBt=true, $
 
 
 
-Form::macro('datepicker', function($name, $label=null, $value=null, $attr = array(), $type = 'date')
+Xform::macro('datepicker', function($name, $label=null, $value=null, $attr = array(), $type = 'date')
 {
 	if(is_null($value) || $value =='')
 	{
 		$value = Input::old($name);
 	}
 
-	return Form::template('div',function($form) use ($name, $label, $attr, $value, $type)
+	return Xform::template('div',function($form) use ($name, $label, $attr, $value, $type)
 	{
 		if(have_error($form, $name))
 		{
@@ -509,9 +509,9 @@ Form::macro('datepicker', function($name, $label=null, $value=null, $attr = arra
 });
 
 
-Form::macro('ng_datepicker',function($name, $label, $ng_model, $value = null, $attr = null)
+Xform::macro('ng_datepicker',function($name, $label, $ng_model, $value = null, $attr = null)
 {
-	return Form::template('div',function($form) use ($name, $label, $ng_model, $value, $attr)
+	return Xform::template('div',function($form) use ($name, $label, $ng_model, $value, $attr)
 	{
 		if(is_null($attr))
 		{
@@ -528,9 +528,9 @@ Form::macro('ng_datepicker',function($name, $label, $ng_model, $value = null, $a
 	});
 });
 
-Form::macro('label_value', function($label, $value, $attr = array())
+Xform::macro('label_value', function($label, $value, $attr = array())
 {
-	return Form::template('div', function($form) use($label, $value, $attr)
+	return Xform::template('div', function($form) use($label, $value, $attr)
 	{
 		$form->label($label);
 		$form->span($value)->setAttributes($attr);
@@ -539,18 +539,18 @@ Form::macro('label_value', function($label, $value, $attr = array())
 });
 
 
-Form::macro('multi_select',function($name, $label, $options, $value=null, $attr=array())
+Xform::macro('multi_select',function($name, $label, $options, $value=null, $attr=array())
 {
-	return Form::template('div',function($form) use($name, $label, $options, $value, $attr)
+	return Xform::template('div',function($form) use($name, $label, $options, $value, $attr)
 	{
 		$form->select($name, $label)->options($options, $value)->multiple(true)->setAttributes($attr);
 	});
 });
 
 
-Form::macro('ng_multi_select', function($name, $label, $ng_model, $ng_options, $attr=array())
+Xform::macro('ng_multi_select', function($name, $label, $ng_model, $ng_options, $attr=array())
 {
-	return Form::template('div', function($form) use($name, $label, $ng_model, $ng_options, $attr)
+	return Xform::template('div', function($form) use($name, $label, $ng_model, $ng_options, $attr)
 	{
 		$form->setClass('fill-up');
 		$ng_options = 'xitem.id as xitem.name for xitem in '.$ng_options;
@@ -561,18 +561,18 @@ Form::macro('ng_multi_select', function($name, $label, $ng_model, $ng_options, $
 
 
 
-Form::macro('input_select',function($name, $label, $options, $value=null, $attr=array())
+Xform::macro('input_select',function($name, $label, $options, $value=null, $attr=array())
 {
-	return Form::template('div',function($form) use($name, $label, $options, $value, $attr)
+	return Xform::template('div',function($form) use($name, $label, $options, $value, $attr)
 	{
 		$form->select($name, $label)->options($options, $value)->setAttributes($attr);
 	});
 });
 
 
-Form::macro('ng_toolbar',function($buttons)
+Xform::macro('ng_toolbar',function($buttons)
 {
-	return Form::template('div',function($form) use($buttons)
+	return Xform::template('div',function($form) use($buttons)
 	{
 		foreach($buttons as $btnLabel => $btnAction)
 		{
@@ -586,9 +586,9 @@ Form::macro('ng_toolbar',function($buttons)
 
 //Accordion Template
 
-Form::macro('acc_heading',function($parent_id, $link, $heading)
+Xform::macro('acc_heading',function($parent_id, $link, $heading)
 {
-	return Form::template('div',function($form)use($parent_id, $link, $heading)
+	return Xform::template('div',function($form)use($parent_id, $link, $heading)
 	{
 		$form->a(function($a) use ($heading, $parent_id, $link)
 		{
@@ -605,9 +605,9 @@ Form::macro('acc_heading',function($parent_id, $link, $heading)
 
 
 
-Form::macro('acc_group',function($parent_id, $group_id, $heading, $callback, $open)
+Xform::macro('acc_group',function($parent_id, $group_id, $heading, $callback, $open)
 {
-	return Form::template('div',function($form)use($parent_id, $group_id, $heading, $callback, $open)
+	return Xform::template('div',function($form)use($parent_id, $group_id, $heading, $callback, $open)
 	{
 
 		$form->acc_heading($parent_id, $group_id, $heading);
@@ -638,10 +638,10 @@ Form::macro('acc_group',function($parent_id, $group_id, $heading, $callback, $op
 
 
 
-Form::macro('accordion',function($container_id, $data)
+Xform::macro('accordion',function($container_id, $data)
 {
 
-		return Form::template('div',function($form) use ($data, $container_id)
+		return Xform::template('div',function($form) use ($data, $container_id)
 		{
 			$accord_id = $container_id.'_accod';
 			$i = 1;
@@ -664,10 +664,10 @@ Form::macro('accordion',function($container_id, $data)
 
 //layout panels
 
-Form::macro('sub_section',function($title, $callback)
+Xform::macro('sub_section',function($title, $callback)
 {
 
-	return Form::template('div',function($form) use($title, $callback)
+	return Xform::template('div',function($form) use($title, $callback)
 	{
 		$form->h4($title);
 		$form->hr();
@@ -684,9 +684,9 @@ Form::macro('sub_section',function($title, $callback)
 
 
 //Custom Fields panel
-Form::macro('custom_field', function($name, $attr)
+Xform::macro('custom_field', function($name, $attr)
 {
-	return Form::template('div', function($form) use ($name, $attr)
+	return Xform::template('div', function($form) use ($name, $attr)
 	{
 		$label = isset($attr['label']) ? $attr['label'] : null;
 		$fieldType = isset($attr['type']) ? $attr['type'] : 'text';
@@ -780,9 +780,9 @@ Form::macro('custom_field', function($name, $attr)
 
 
 
-Form::macro('custom_fields', function($fields)
+Xform::macro('custom_fields', function($fields)
 {
-	return Form::template('div',function($form) use ($fields)
+	return Xform::template('div',function($form) use ($fields)
 	{
 			foreach($fields as $name => $attr)
 			{
@@ -792,9 +792,9 @@ Form::macro('custom_fields', function($fields)
 });
 
 
-Form::macro('ng_custom_fields', function($fields, $angularRootItem = 'item')
+Xform::macro('ng_custom_fields', function($fields, $angularRootItem = 'item')
 {
-	return Form::template('div',function($form) use ($fields, $angularRootItem)
+	return Xform::template('div',function($form) use ($fields, $angularRootItem)
 	{
 			foreach($fields as $name => $attr)
 			{

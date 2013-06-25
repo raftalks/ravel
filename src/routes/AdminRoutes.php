@@ -1,5 +1,6 @@
 <?php
 
+
 Route::filter('ravelauth', function()
 {
 	if(Request::ajax())

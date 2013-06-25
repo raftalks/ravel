@@ -1,4 +1,4 @@
-<?php echo HTML::make('div',function($html)
+<?php echo Xhtml::make('div',function($html)
     {
         $html->content_panel(trans('ravel::content.post_categories'),function($div)
         {

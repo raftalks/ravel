@@ -1,7 +1,7 @@
 @section('appcontainer')
 @section('appcontainer')
 {{ 
-	Form::make('div',function($div)
+	Xform::make('div',function($div)
 	{
 		$div->form(function($form)
 		{
