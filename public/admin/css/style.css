@@ -887,3 +887,136 @@ ul.media-collection-list li:hover
 .block{
     display: block;
 }
+
+
+.media_collection_list
+{
+    padding:10px;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    width:100%;
+    /*overflow-x:hidden;*/
+    display: solid;
+}
+
+.media_file_thumbs
+{
+    float:left;
+    padding: 5px;
+    height:120px;
+    width:120px;
+    overflow: hidden;
+
+}
+
+.media_file_thumbs .media_file .media_filename
+{
+    overflow: hidden;
+    width:100%;
+}
+
+.media_file_thumbs .media_file
+{
+    background-color: #fff;
+    padding:5px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+    margin:5px;
+    width:100px;
+}
+
+.media_file_thumbs .media_file img
+{
+    width:100px;
+    max-height: 100px;
+}
+
+.dz-panel
+{
+    width:100%;
+
+}
+.dz-panel .title
+{
+    padding: 5px;
+    background-color: #ccc;
+    border:1px solid #999;
+}
+
+.dz-panel .dropper
+{
+    padding:30px;
+    background-color: rgba(0,0,0,0.02);
+    border: 1px solid rgba(0,0,0,0.08);
+    min-height: 100px;
+}
+
+.dz-panel .hover
+{
+    background-color: #CCE5DE;
+    border:3px solid #52b152;
+}
+
+#dz-list-files ul li
+{
+    background: rgba(255,255,255,0.8);
+    position: relative;
+    display: inline-block;
+    margin: 17px;
+    vertical-align: top;
+    border: 1px solid #acacac;
+    padding: 6px 6px 6px 6px;
+    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
+    font-size: 14px;
+}
+
+#dz-list-files ul li div.dz-details
+{   
+    width: 100px;
+    height: 100px;
+    position: relative;
+    background: #ebebeb;
+    margin-bottom: 22px;
+}
+
+#dz-list-files ul li div.dz-details .dz-filename
+{
+  overflow: hidden;
+  height: 100%;
+}
+
+#dz-list-files ul li div.dz-details .dz-size
+{
+    position: absolute;
+    bottom: -28px;
+    left: 3px;
+    height: 28px;
+    line-height: 28px;
+}
+
+#dz-list-files ul li div.dz-details .thumb-wrap img
+{
+  width: auto;
+  height: 100px;
+  margin: auto -50%;
+}
+
+#dz-list-files ul li div.dz-details .thumb-wrap
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100px;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#dz-list-files ul li:hover div.dz-details .thumb-wrap img
+{
+  display: none;
+}
+
+

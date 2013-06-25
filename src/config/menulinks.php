@@ -38,6 +38,12 @@ return array(
 						
 						),
 
+		'menus'		=> array(
+
+							'label' => 'Menus',
+							'link'	=> action('MenusAdminController@getIndex'),
+
+						),
 
 		'settings'	=> array(
 						'label'		=>'Settings', 
@@ -58,6 +64,7 @@ return array(
 
 	),
 
-	'template'	=> 'ravel::templates.admin.menu'
+	'template'	=> 'ravel::templates.admin.menu',
+	'frontend_template'	=> 'ravel::templates.frontend.menu'
 
 );

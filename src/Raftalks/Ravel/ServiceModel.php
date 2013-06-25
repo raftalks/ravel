@@ -2,6 +2,7 @@
 use Closure;
 use Event;
 use Config;
+use Exception;
 
 abstract class ServiceModel
 {

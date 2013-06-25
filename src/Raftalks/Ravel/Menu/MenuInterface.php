@@ -1,8 +1,8 @@
 <?php namespace Raftalks\Ravel\Menu;
 
-Interface MenuInterface
+Interface MenuBuildInterface
 {
 
-	public function build();
+	public function build($name = null);
 
 }

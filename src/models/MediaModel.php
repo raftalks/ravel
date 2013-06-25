@@ -5,8 +5,10 @@ class MediaModel extends EloquentBaseModel
 
 	protected 		$table 			='medias';
 	protected	 	$fillable 		= array(
+										'mcollection_id',
 										'media_type',
 										'path',
+										'url',
 										'file_name',
 										'user_id',
 										'caption',

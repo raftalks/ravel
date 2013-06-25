@@ -156,3 +156,23 @@ if(! function_exists('is_closure'))
    		 return is_object($t) && ($t instanceof Closure);
 	}
 }
+
+
+if(! function_exists('buildTree'))
+{
+	function buildTree(array $elements, $parentId = 0, $parentKey = 'parent_id', $childKey='children') {
+	    
+	    $branch = array();
+	    foreach ($elements as $menu_id => $element) {
+	        if ($element[$parentKey] == $parentId) {
+	            $children = buildTree($elements, $menu_id, $parentKey, $childKey);
+	            if ($children) {
+	                $element[$childKey] = $children;
+	            }
+	            $branch[] = $element;
+	        }
+	    }
+
+	    return $branch;
+	}
+}

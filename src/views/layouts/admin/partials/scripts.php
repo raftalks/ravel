@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	//APP MODULE
-	var App = angular.module('app', ['ngResource','ui','ck'], function ($routeProvider, $locationProvider, $httpProvider) {
+	var App = angular.module('app', ['ngResource','ui','ck','ui.dropzone'], function ($routeProvider, $locationProvider, $httpProvider) {
 
     var interceptor = ['$rootScope', '$q', function (scope, $q) {
 

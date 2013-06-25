@@ -79,6 +79,7 @@
 		
 		<!--Dropzone -->
 		<script type="text/javascript" src="<?php echo admin_asset('admin/dropzone/dropzone.min.js');?>"></script>
+		<script type="text/javascript" src="<?php echo admin_asset('admin/dropzone/angular-dropzone.js');?>"></script>
 		
 	
 		

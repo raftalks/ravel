@@ -61,8 +61,8 @@ return array(
 							'PostCategory'	=> 'Raftalks\Ravel\Facades\PostCategory',
 							'Menu'			=> 'Raftalks\Ravel\Facades\Menu',
 							'UsersLibrary'	=> 'Raftalks\Ravel\Facades\UsersLibrary',
-							'Html'			=> 'Html\Html',
-							'Form'			=> 'Form\Form',
+							'Html'			=> 'Raftalks\Form\Html\Html',
+							'Form'			=> 'Raftalks\Form\Form',
 							'Image' 		=> 'Intervention\Image\Facades\Image',
 						),    
 

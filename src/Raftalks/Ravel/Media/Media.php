@@ -77,7 +77,17 @@ class Media extends ServiceModel
 	{
 		return array(
 				'h' => Config::get('ravel::media.image_thumb_with'),
-				'w' => Config::get('ravel::media.image_thumb_height')
+				'w' => Config::get('ravel::media.image_thumb_height'),
+				'p'	=> Config::get('ravel::media.thumb_proportionate')
+			);
+	}
+
+	private function mediumSizes()
+	{
+		return array(
+				'h' => Config::get('ravel::media.medium_image_width'),
+				'w' => Config::get('ravel::media.medium_image_height'),
+				'p'	=> Config::get('ravel::media.medium_image_proportionate')
 			);
 	}
 
@@ -152,18 +162,23 @@ class Media extends ServiceModel
 			$mediaType = $this->getMediaType($file);
 			$uploadPath = $this->getUploadPath();
 
+			$publicPath = app()->make('path.public');
+			
 			$path = $uploadPath . '/'.$subDirName.'/';
+
+			$url = str_replace($publicPath, '', $path);
 
 			$data['file_name'] = str_replace(' ','_', $filename);
 			$data['media_type'] = $mediaType;
 			$data['path'] = $path;
+			$data['url'] = $url;
 			$data['sub_dir'] = $subDirName;
 			$data['user_id'] = $this->getAuthorId();
+			$data['mcollection_id'] = $data['collection_id'];
 
 		} else
 		{
 			throw new Exception("Invalid File Object", 406);
-			
 		}
 	}
 
@@ -191,18 +206,6 @@ class Media extends ServiceModel
 			$thumb_path = $uploadRealPath . '/thumbs/';
 			$thumb_filename = 'thumb_'.$filename;
 
-			// if( ! app('files')->isDirectory($uploadPath))
-			// {
-			// 	//create upload path
-			// 	app('files')->makeDirectory($uploadPath);
-
-			// }
-
-			// if(! app('files')->isDirectory($uploadRealPath))
-			// {
-			// 	//create subdirectory
-			// 	app('files')->makeDirectory($uploadRealPath);
-			// }
 
 			$origImagePath = $uploadRealPath . $filename;
 			$thumbImgePath = $thumb_path.$thumb_filename;
@@ -223,8 +226,26 @@ class Media extends ServiceModel
 				$ts = $this->thumbnailSize();
 
 				$img = Image::make( $thumbImgePath)
-						->resize($ts['w'],$ts['h'],true)
+						->resize($ts['w'],$ts['h'],$ts['p'])
 						->save();
+
+
+				$mediumImgUploadPath = $uploadRealPath . '/medium/';
+
+				//create medium images dir if not exist
+				if( ! app('files')->isDirectory($mediumImgUploadPath))
+				{
+					app('files')->makeDirectory($mediumImgUploadPath);
+				}
+
+				app('files')->copy($origImagePath, $mediumImgUploadPath . $filename);
+
+				$ms = $this->mediumSizes();
+
+				Image::make($mediumImgUploadPath . $filename)
+						->resize($ms['w'],$ms['h'],$ms['p'])
+						->save();
+
 			}
 			
 			
@@ -232,6 +253,8 @@ class Media extends ServiceModel
 	}
 
 
+
+	
 
 
 

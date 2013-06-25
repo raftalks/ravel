@@ -16,7 +16,7 @@
 	</div> 
 	
 	<?php
-		echo Menu::build();
+		echo Menu::build('admin.menu');
 	?>
 	
 	</div>

@@ -24,6 +24,6 @@ Route::group(array('prefix'=>_ADMIN_BASE_),function()
 	Route::controller("/login", 'AdminUserLoginController');
 	Route::controller("/settings/users", 'UsersAdminController');
 	Route::controller('/medias','MediaAdminController');
-
+	Route::controller('/menus','MenusAdminController');
 });
 
