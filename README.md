@@ -3,7 +3,7 @@
 #### STATUS: UNDER DEVELOPMENT
 
 ### RavelCMS Ver 1 is getting ready to be released.
-- I am planing to change the whole design of the admin panel soon.
+- I am planning to change the whole design of the admin panel soon.
 - Here is a preview of the new design.
 ![Screenshot](http://screencloud.net/img/screenshots/4a01c549ab3d3854e26eba0888fc2e2d.png)
 
