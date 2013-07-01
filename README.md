@@ -22,6 +22,8 @@
 	}
 ```
 
+- Configure your database settings in the L4 app/config/database.php file
+- Open your terminal in the L4 App root directory and run `php composer.phar update` command
 - Add Ravel Service Provider to the app/config/app.php file under the array key "providers" as shown below
 
 ```php
@@ -33,8 +35,6 @@
 )
 
 ```
-- Configure your database settings in the L4 app/config/database.php file
-- Open your terminal in the L4 App root directory and run `php composer.phar update` command
 - And run the following command in the terminal to start installing the CMS package
 
 ```
