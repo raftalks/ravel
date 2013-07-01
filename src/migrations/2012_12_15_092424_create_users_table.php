@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration {
 			$table->string('username',100)->unique();
 		    $table->string('email')->unique();
 		    $table->string('password');
+		    $table->string('first_name',100);
+		    $table->string('last_name',100);
 		    $table->string('api_token',100);
 		    $table->integer('usergroup_id')->unsigned();
 		    $table->boolean('activated')->default(false);

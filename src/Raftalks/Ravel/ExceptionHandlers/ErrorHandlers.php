@@ -11,7 +11,8 @@ App::error(function(Exception $e, $code)
 
 	if (Request::ajax())
 	{
-		$default_message = 'Oops! Something went wrong...';
+		$default_message = 'Error : '.$e->getMessage().
+                        " : \n".$e->getFile()." : \n".$e->getLine()." : \n".$e->getCode();
 		$headers = array();
 
 		return Response::json(array(

@@ -10,9 +10,5 @@ class MediaCollectionApiController extends ResourceApiBase
 	}
 
 
-
-	
-
-
 		
 }

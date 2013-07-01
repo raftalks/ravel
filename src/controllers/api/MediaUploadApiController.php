@@ -1,41 +1,27 @@
 <?php
 
-class MediaUploadApiController extends ResourceApiBase
-{
-	protected $moduleName = 'Medias';
+class MediaUploadApiController extends ResourceApiBase {
 
-	protected function setupResources()
-	{
-		$this->resource = app('Media');
-	}
+    protected $moduleName = 'Medias';
 
+    protected function setupResources() {
+        $this->resource = app('Media');
+    }
 
-	/**
-	 * POST Create new Resource
-	 */
-	public function store()
-	{
-		$data = Input::all();
-		
-		$respond = $this->resource->insert($data);
+    /**
+     * POST Create new Resource
+     */
+    public function store() {
+        $data = Input::all();
 
-		//if respond returns boolean false
-		if(is_bool($respond) === true)
-		{
-			$errors = $this->resource->getErrors();
-			$status = $this->resource->getResponseStatus();
-			return $this->errorResponse($errors, $status);
-		}
+        $respond = $this->resource->insert($data);
 
-		if(is_bool($respond) === true && ($respond === false))
-		{
-			$errors = $this->resource->getErrors();
-			$status = $this->resource->getResponseStatus();
-			return $this->errorResponse($errors, 400);
-		} else
-		{
-			return Response::json('success', 200);
-		}
-	}
-	
+        if (is_bool($respond) && !$respond) {
+            $errors = $this->resource->getErrors();
+            $status = $this->resource->getResponseStatus();
+            return $this->errorResponse($errors, 400);
+        }
+        return Response::json(json_encode($respond), 200);
+    }
+
 }

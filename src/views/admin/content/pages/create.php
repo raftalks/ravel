@@ -1,6 +1,6 @@
 <?php
 
-echo Xform::make('div',function($form)
+echo Form::make('div',function($form)
 {
 
 	$form->box_panel(trans('ravel::content.create_page'),function($form)
@@ -40,11 +40,8 @@ echo Xform::make('div',function($form)
 				//status of the page
 				$div->select('status',trans('ravel::content.status'))->options($options)->ng_model('item.status','ng-model');
 				
-
 				//author name can be set to display any name
 				$div->text('author',trans('ravel::content.show_author_as'))->ng_model('item.author_name','ng-model');
-
-
 
 				//allow comments submission to this page				
 				$div->fieldset(function($div)
@@ -96,14 +93,13 @@ echo Xform::make('div',function($form)
 				$div->button(trans('ravel::content.save'))->class('button')->ng_click('submit()','ng-click');
 				$div->button(trans('ravel::content.cancel'))->class('button')->ng_click('cancel()','ng-click');
 
-				$div->setClass('column-panel');
+				$div->setClass('well');
 			});
 
-			$div->setClass('column span4');
+			$div->setClass('column span3');
 		});
 
 		$form->div()->class('clear');
-
 		
 	});
 

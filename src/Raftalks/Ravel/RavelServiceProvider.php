@@ -44,13 +44,6 @@ class RavelServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-
-		if(ini_get('xdebug.max_nesting_level'))
-		{
-			ini_set('xdebug.max_nesting_level', 250);
-		}
-		
-
 		$this->defineConstants();
 		$path = $this->guessPackagePath();
 

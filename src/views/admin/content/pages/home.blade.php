@@ -1,3 +1,5 @@
+{{-- admin/content/pages/home.blade.php --}}
+
 @section('appcontainer')
 <div ng-controller='MasterCtrl'>
 

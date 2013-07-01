@@ -19,6 +19,11 @@ App::bind('Media',function()
 	return new Media;
 });
 
+App::bind('Map',function()
+{
+	return new Map;
+});
+
 App::bind('Mcollection', function()
 {
 	return new Mcollection;

@@ -1,6 +1,6 @@
 <?php
 
-echo Xform::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
+echo Form::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
 {
 	$form->share('ravel_list_layouts',$ravel_item_layouts);
 	$form->share('ravel_list_layouts',$ravel_list_layouts);
@@ -25,19 +25,16 @@ echo Xform::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
 
 						$ravel_item_layouts = $form->get('ravel_item_layouts');
 						$ravel_list_layouts = $form->get('ravel_list_layouts');
-
 						
 						$form->select('list_layout',trans('ravel::content.list_layout'))->options($ravel_list_layouts,null)->ng_model('item.list_layout','ng-model');
 
 						$form->select('item_layout',trans('ravel::content.item_layout'))->options($ravel_item_layouts,null)->ng_model('item.item_layout','ng-model');
-
 
 						$form->setClass('span6');
 					});
 
 					$form->setClass('span12');
 				});
-
 
 				$form->setClass('row-fluid');
 			});
@@ -54,7 +51,7 @@ echo Xform::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
 				$div->button(trans('ravel::form.cancel'))->class('button')->ng_click('cancel()','ng-click');
 				$div->button(trans('ravel::form.delete'))->class('button')->ng_click('delete()','ng-click');
 
-				$div->setClass('column-panel');
+				$div->setClass('well');
 			});
 
 			$div->setClass('column span4');

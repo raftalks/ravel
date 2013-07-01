@@ -1,6 +1,6 @@
 <?php
 
-echo Xform::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
+echo Form::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
 {
 	$form->share('ravel_item_layouts',$ravel_item_layouts);
 	$form->share('ravel_list_layouts',$ravel_list_layouts);
@@ -52,7 +52,7 @@ echo Xform::make(function($form) use($ravel_list_layouts, $ravel_item_layouts)
 				$div->button(trans('ravel::form.save'))->class('button')->ng_click('submit()','ng-click');
 				$div->button(trans('ravel::form.cancel'))->class('button')->ng_click('cancel()','ng-click');
 
-				$div->setClass('column-panel');
+				$div->setClass('well');
 			});
 
 			$div->setClass('column span4');

@@ -8,7 +8,6 @@ class AdminController extends AppController
 
 	protected $layout = 'ravel::layouts.admin.default';
 
-
 	public function __construct()
 	{
 
@@ -17,7 +16,6 @@ class AdminController extends AppController
 		$ACL = $this->Acl = App::make('AccessControl');
 		
 		$ACL->setModule($this->moduleName);
-		
 		
 	}
 

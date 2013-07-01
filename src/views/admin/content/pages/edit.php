@@ -1,6 +1,8 @@
 <?php
 
-echo Xform::make('div',function($form)
+/* admin/content/pages/edit.php */
+
+echo Form::make('div',function($form)
 {
 
 	$form->box_panel(trans('ravel::content.update_page'),function($form)
@@ -12,7 +14,8 @@ echo Xform::make('div',function($form)
 
 			$div->textarea('excerpt',trans('ravel::content.excerpt'))->ng_model('item.excerpt','ng-model')->class('excerpt-textarea');
 
-			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea')->ckeditor('','ck-editor');;
+//			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea');
+			$div->textarea('content',trans('ravel::content.content'))->ng_model('item.content','ng-model')->class('content-textarea')->ckeditor('','ck-editor');
 
 			$customfields = Config::get('ravel::content.custom_fields.page');
 			$div->ng_custom_fields($customfields);
@@ -99,10 +102,10 @@ echo Xform::make('div',function($form)
 				$div->button(trans('ravel::content.cancel'))->class('button')->ng_click('cancel()','ng-click');
 				$div->button(trans('ravel::form.delete'))->class('button')->ng_click('delete()','ng-click');
 
-				$div->setClass('column-panel');
+				$div->setClass('well');
 			});
 
-			$div->setClass('column span4');
+			$div->setClass('column span3');
 		});
 
 		$form->div()->class('clear');
