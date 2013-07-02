@@ -1,6 +1,6 @@
 <?php
 
-echo Xform::make('div',function($form)
+echo Form::make('div',function($form)
 {
 	//$form->share('categories', $post_categories);
 
@@ -107,10 +107,10 @@ echo Xform::make('div',function($form)
 				$div->button(trans('ravel::content.save'))->class('button')->ng_click('submit()','ng-click');
 				$div->button(trans('ravel::content.cancel'))->class('button')->ng_click('cancel()','ng-click');
 
-				$div->setClass('column-panel');
+				$div->setClass('well');
 			});
 
-			$div->setClass('column span4');
+			$div->setClass('column span3');
 		});
 
 		$form->div()->class('clear');

@@ -28,6 +28,7 @@ class PostsAdminController extends AdminController
 
 		$data['post_categories'] = $cats;
 
+		// $this->layout->nest('content','ravel::admin.content.posts.home',$data);
 		$this->layout->nest('content','ravel::admin.content.posts.home',$data);
 
 	}

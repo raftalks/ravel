@@ -29,7 +29,7 @@ class Mcollection extends EloquentBaseModel
 
 	public function items()
 	{
-		return $this->hasMany('MediaModel');
+		return $this->belongsToMany('MediaModel','mcollection_media','media_id','mcollection_id');
 	}
 
 

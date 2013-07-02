@@ -14,7 +14,6 @@ return array(
 				'global',
 				'contents',
 				'medias',
-				'menus',
 				'categories',
 				'settings'
 

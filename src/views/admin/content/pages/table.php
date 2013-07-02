@@ -1,4 +1,4 @@
-<?php echo Xhtml::make('div',function($html)
+<?php echo HTML::make('div',function($html)
     {
         $html->content_panel('Pages',function($div)
         {

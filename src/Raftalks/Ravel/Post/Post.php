@@ -10,8 +10,13 @@ class Post extends Content
 	protected $useContentCategories = true;
 	
 
-	public function ContentModel()
-	{
+	public function ContentModel()	{
 		return app('ContentModel');
+	}
+	public function with() {
+		return $this;
+	}
+	public static function paginate($num) {
+		
 	}
 }
