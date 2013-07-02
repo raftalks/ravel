@@ -2,6 +2,11 @@
 
 #### STATUS: UNDER DEVELOPMENT
 
+### RavelCMS Ver 1 is getting ready to be released.
+- I am planning to change the whole design of the admin panel soon.
+- Here is a preview of the new design.
+![Screenshot](http://screencloud.net/img/screenshots/4a01c549ab3d3854e26eba0888fc2e2d.png)
+
 ## CMS Package for Laravel 4
 
 ![Screenshot](http://screencloud.net/img/screenshots/307e79230eeb5085677d7fc260dfc05f.png)
@@ -17,6 +22,8 @@
 	}
 ```
 
+- Configure your database settings in the L4 app/config/database.php file
+- Open your terminal in the L4 App root directory and run `php composer.phar update` command
 - Add Ravel Service Provider to the app/config/app.php file under the array key "providers" as shown below
 
 ```php
@@ -28,8 +35,6 @@
 )
 
 ```
-- Configure your database settings in the L4 app/config/database.php file
-- Open your terminal in the L4 App root directory and run `php composer.phar update` command
 - And run the following command in the terminal to start installing the CMS package
 
 ```
