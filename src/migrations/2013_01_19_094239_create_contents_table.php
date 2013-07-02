@@ -35,7 +35,7 @@ class CreateContentsTable extends Migration {
 			$table->datetime('publish_date');
 			$table->timestamps();
 
-			$table->unique(array('slug','content_type','lang','publish_date'),'contents_unique');
+			$table->unique(array('content_type','lang','publish_date'),'contents_unique');
 
 			$table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
 
