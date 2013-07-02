@@ -19,7 +19,7 @@ class CreateCategoryContentJoinTable extends Migration {
 			$table->integer('content_id')->unsigned();
 			$table->timestamps();
 
-			$table->unique(array('category_id','content_id'));
+			$table->unique(array('category_id','content_id'),'cat_con_unique');
 
 			$table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 			$table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');

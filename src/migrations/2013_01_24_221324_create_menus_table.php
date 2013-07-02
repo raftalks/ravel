@@ -19,7 +19,7 @@ class CreateMenusTable extends Migration {
 			$table->string('lang',3);
 			$table->timestamps();
 			
-			$table->unique(array('name','lang'));
+			$table->unique(array('name','lang'),'menus_unique');
 			
 		});
 	}
