@@ -16,7 +16,7 @@
 				</div>
 			</noscript>
 			
-			<div ng-show='nowloading' ><i class="icon-spinner icon-spin"></i></div>
+			<div ng-show='nowloading' ><i class="icon-spinner icon-spin" style="display:none"></i></div>
 			
 			@yield('appcontainer')
 
